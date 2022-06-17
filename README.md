@@ -1,6 +1,8 @@
 # Background
 **Quick Chef** is a cooking game where Players collect points by fulfilling as many recipe/order requests as they can over a set timer (5min).
+
 The Player will use key-combos to perform actions required to make the recipe, such as collecting specific ingredient, processing ingredients (e.g. cut, pan-fry, mix, bake, etc.), assembling the food items, and serving/tossing the assembled items. The time it takes to collect and processess these ingredients are represented by queueing up the ingredient/processed food items at the top of the screen, where it will fall down over time for the player to catch. Once the player catches an ingredient, they can choose to process it or put it onto the assembly station/plate. At any time, the player can decide to serve or toss the ingredients on the assembly station (if ingredients match a currently required recipe, will serve, otherwise will toss)
+
 The general flow of the game will be as follows:
         1. A 5 min timer will start counting down at the begining of the game. The game ends when the timer runs out.
         2. A set of 3 random recipes/orders will be selected, each with their own timer and instructions at the top. When recipe timers run out, the order will dissapear (the player will potentially loose points) and a new random recipe will be presented.
