@@ -1,5 +1,4 @@
-#BACKGROUND
-
+# Background
     **Quick Chef** is a cooking game where Players collect points by fulfilling as many recipe/order requests as they can over a set timer (5min).
 
     The Player will use key-combos to perform actions required to make the recipe, such as collecting specific ingredient, processing ingredients (e.g. cut, pan-fry, mix, bake, etc.), assembling the food items, and serving/tossing the assembled items. The time it takes to collect and processess these ingredients are represented by queueing up the ingredient/processed food items at the top of the screen, where it will fall down over time for the player to catch. Once the player catches an ingredient, they can choose to process it or put it onto the assembly station/plate. At any time, the player can decide to serve or toss the ingredients on the assembly station (if ingredients match a currently required recipe, will serve, otherwise will toss)
@@ -14,7 +13,7 @@
         7. The goal of the game is to collect as much points as possible within the 5 min timer.
 
 
-#FUNCTIONALITY & MVPS
+# Functionality & MVPs
 
     In **Quick Chef**, users will be able to:
         + use key combos to select ingredients and cooking actions
@@ -27,20 +26,20 @@
         - a production README
 
 
-WIREFRAMES
+# Wireframes
 
     https://wireframe.cc/7bogl2
 
 
-TECHNOLOGIES, LIBRARIES, APIS
+# Technologies, Libraries, APIs
 
     - Canvas API (incl. sprites)
     - potential local database for registering top player scores
 
 
-IMPLEMENTATION TIMELINE
+# Implementation Timeline
 
-    Friday Afternoon & Weekend
+    ## Friday Afternoon & Weekend
         - Key-bind for selecting various ingredient & various action
         - Queue for ingredient drop
         - Ingredient drop animation & pick up animation
@@ -48,19 +47,20 @@ IMPLEMENTATION TIMELINE
         - Matching logic for serving/tossing
         - Random ingredient generator
         - Collect basic recipe & ingredients
-    Monday
+
+    ## Monday
         - Timer logic and point system
         - Collecting graphics
         - Implementing Graphics
-    Tuesday
+    ## Tuesday
         - Requeuing of tossed items
         - Implementing other API comments (music/sound, pause)
-    Wednesday
+    ## Wednesday
         - top score board
         - testing & touchup
-    Thursday Morning
+    ## Thursday Morning
         - testing & touchup
 
-BONUS FEATURES (Optional)
+# Bonus Features
     - multiplayer (co-op)
     - multiplayer (competitve)
