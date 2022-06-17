@@ -17,30 +17,30 @@ The general flow of the game will be as follows:
 # Functionality & MVPs
 
 In **Quick Chef**, users will be able to:
-+ Use key combos to select ingredients and cooking actions
-+ Move left and right to catch falling ingredients
-+ Pause the game and mute music
-+ Register top score
+- Use key combos to select ingredients and cooking actions
+- Move left and right to catch falling ingredients
+- Pause the game and mute music
+- Register top score
 
 In addition, this project will include:
-+ An About modal describing the background and rules of the game
-+ A production README
+- An About modal describing the background and rules of the game
+- A production README
 
 
 # Wireframes
 
 https://wireframe.cc/7bogl2
-
+![Wireframe](https://github.com/xLucyLuo/QuickChef/blob/main/Wireframe.png)
 
 # Technologies, Libraries, APIs
 
-+ Canvas API (incl. sprites)
-+ potential local database for registering top player scores
+- Canvas API (incl. sprites)
+- potential local database for registering top player scores
 
 
 # Implementation Timeline
 
-## Friday Afternoon & Weekend
+### Friday Afternoon & Weekend
 - Key-bind for selecting various ingredient & various action
 - Queue for ingredient drop
 - Ingredient drop animation & pick up animation
@@ -49,17 +49,17 @@ https://wireframe.cc/7bogl2
 - Random ingredient generator
 - Collect basic recipe & ingredients
 
-## Monday
+### Monday
 - Timer logic and point system
 - Collecting graphics
 - Implementing Graphics
-## Tuesday
+### Tuesday
 - Requeuing of tossed items
 - Implementing other API comments (music/sound, pause)
-## Wednesday
+### Wednesday
 - top score board
 - testing & touchup
-## Thursday Morning
+### Thursday Morning
 - testing & touchup
 
 # Bonus Features
