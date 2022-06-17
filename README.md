@@ -2,9 +2,12 @@
 
 **Quick Chef** is a cooking game where Players collect points by fulfilling as many recipe/order requests as they can over a set timer (5min).
 
-The Player will use key-combos to perform actions required to make the recipe, such as collecting specific ingredient, processing ingredients (e.g. cut, pan-fry, mix, bake, etc.), assembling the food items, and serving/tossing the assembled items. The time it takes to collect and processess these ingredients are represented by queueing up the ingredient/processed food items at the top of the screen, where it will fall down over time for the player to catch. Once the player catches an ingredient, they can choose to process it or put it onto the assembly station/plate. At any time, the player can decide to serve or toss the ingredients on the assembly station (if ingredients match a currently required recipe, will serve, otherwise will toss)
++ The Player will use key-combos to perform actions required to make recipes. 
++ Fetching and processing ingredients will take time to finish, represented by queues of falling ingredient/processed food items over the timer duration. 
++ To "complete" the action, the player needs to catch the item and then enter another key-combo to choose the next action.
++ At any time, the Player can choose to serve the items they place into an assembly station, which will run a matching logic on the items inside. If item combos match a recipe, points are collected, otherwise everything is thrown out.
 
-The general flow of the game will be as follows:
+A general flow of the game:
 1. A 5 min timer will start counting down at the begining of the game. The game ends when the timer runs out.
 2. A set of 3 random recipes/orders will be selected, each with their own timer and instructions at the top. When recipe timers run out, the order will dissapear (the player will potentially loose points) and a new random recipe will be presented.
 3. There will be 4-5 different ingredients that the player can select using specifically mapped key combos (e.g. WASD for tomatoe). Once selected the ingredient will queue up at the top (4 queues) and fall down for the Player to catch (max hold one item at a time)
@@ -29,7 +32,6 @@ In addition, this project will include:
 
 # Wireframes
 
-https://wireframe.cc/7bogl2
 ![Wireframe](https://github.com/xLucyLuo/QuickChef/blob/main/Wireframe.png)
 
 # Technologies, Libraries, APIs
