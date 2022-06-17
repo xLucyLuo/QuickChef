@@ -4,8 +4,8 @@
 
 + The Player will use key-combos to perform actions required to make recipes. 
 + Fetching and processing ingredients will take time to finish, represented by queues of falling ingredient/processed food items over the timer duration (async). 
-+ To "complete" the action, the player needs to catch the item and then enter another key-combo to choose the next action.
-+ At any time, the Player can choose to serve the items they have previously placed into an assembly station, which will run a matching logic on the items inside. If item combos match a recipe, points are collected, otherwise everything is thrown out.
++ To "complete" the action, the player needs to catch the item and then enter another key-combo to chain the next action.
++ At any time, the Player can choose to serve the items they have placed into an assembly station, which will run a matching logic. If items assembledmatch a recipe, points are collected, otherwise everything is thrown out.
 
 # Functionality & MVPs
 
