@@ -2,7 +2,9 @@ import MovingObject from "./moving_object.js"
 
 class Chef extends MovingObject{
     constructor(dimentions, game){
-        super(dimentions, game)
+        const img = new Image();
+        img.src = "../assets/images/chef.jpg";
+        super(dimentions, game, img)
     }
 }
 
