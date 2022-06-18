@@ -1,0 +1,11 @@
+@import "./styles/reset.scss";
+@import './styles/canvas.scss';
+
+
+header {
+    display: inline-block;
+    color: red;
+    width: 100%;
+    font-size: 50px;
+    text-align: center;
+}

@@ -27,6 +27,7 @@ In addition, this project will include:
 # Technologies, Libraries, APIs
 
 - Canvas API (incl. sprites)
+- Keymaster
 - potential local database for registering top player scores
 
 
