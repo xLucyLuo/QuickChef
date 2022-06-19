@@ -1,4 +1,9 @@
-
+const ACTION_COMBOS = {
+    "wawa": 0,
+    "asas": 1,
+    "wdwd": 2,
+    "sdsd": 3
+}
 
 class GameView{
     constructor(game, ctx){
@@ -11,7 +16,6 @@ class GameView{
     bindKeyHandlers() {
         const game = this.game;
         let actionCombo = ""
-        let that = this
         document.addEventListener('keydown', function(event) {
             switch (event.key) {
                 case "ArrowLeft":
@@ -30,34 +34,17 @@ class GameView{
                     if (event.repeat) { return }
                     actionCombo+=event.key
                     if (actionCombo.length === 4){
-                        that.evaluateCombo(actionCombo);
+                        game.addToQueue(ACTION_COMBOS[actionCombo]);
+                        console.log(event.key)
+                        console.log(actionCombo)
                         actionCombo = ""
                     }
                     break;
             }
-            console.log(event.key)
-            console.log(actionCombo)
+        
             game.draw()
         })
     }
-
-    evaluateCombo(actionCombo){
-        switch (actionCombo) {
-            case "wawa":
-                this.game.addToQueue(0)
-                break;
-            case "asas":
-                break;
-            case "wdwd":
-                // Up pressed
-                break;
-            case "dsds":
-                // Down pressed
-                break;
-        }
-    }
-
-      
 }
 
 export default GameView
