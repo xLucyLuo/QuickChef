@@ -1,39 +1,46 @@
 
 const ANIMATION_SPEED = 8
-const VEL = 5
-const WIDTH = 100
-const HEIGHT = 120
+const VEL = 10
 
 class MovingObject {
-  constructor(dimensions, game, img){
-    this.dimensions = dimensions;
-    this.x = this.dimensions.width/ 2;
-    this.y = this.dimensions.height - HEIGHT;
+  constructor(x,y, game, img, width, height){
+    this.dimensions = game.dimensions;
+    this.x = x;
+    this.y = y;
 //     this.y = this.dimensions.height / 2;
     this.game = game;
-    this.vel = VEL;
     this.img = img;
+    this.width = width
+    this.height = height
+    this.vel = VEL;
+
   }
 
   draw(){
     // debugger
     if (this.img === undefined){
       this.game.ctx.fillStyle = "red";
-      this.game.ctx.fillRect(this.x, this.y, WIDTH, HEIGHT);
+      this.game.ctx.fillRect(this.x, this.y, this.width, this.height);
     }else {
-      this.game.ctx.drawImage(this.img, this.x, this.y, WIDTH, HEIGHT);
+      this.game.ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     }
   }
 
   moveLeft() {
-    this.x -= this.vel;
+    const leftLimit = this.dimensions.width*0.2-5
+    const x2 = this.x - this.vel
+    if (x2 >= leftLimit){
+      this.x = x2;
+    }
   }
 
   moveRight() {
-    this.x += this.vel;
+    const rightLimit = this.dimensions.width*0.80-this.width+5
+    const x2 = this.x + this.vel
+    if (x2 < rightLimit){
+      this.x = x2;
+    }
   }
-  
-
 }
 export default MovingObject
 

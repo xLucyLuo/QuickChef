@@ -55,16 +55,21 @@ table {
   border-spacing: 0;
 }
 
-canvas {
-  background-color: pink;
+canvas#cooking-table {
+  background-color: #ffddae;
   margin: auto;
   display: block;
 }
 
-header {
+header h1 {
   display: inline-block;
-  color: red;
+  color: white;
+  background-color: pink;
   width: 100%;
   font-size: 50px;
   text-align: center;
+}
+
+body {
+  background-image: url("../assets/images/background.jpg");
 }

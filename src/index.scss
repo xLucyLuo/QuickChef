@@ -1,11 +1,16 @@
 @import "./styles/reset.scss";
-@import './styles/canvas.scss';
+@import './styles/interface.scss';
 
 
-header {
+header h1{
     display: inline-block;
-    color: red;
+    color: white;
+    background-color: pink;
     width: 100%;
     font-size: 50px;
     text-align: center;
+}
+
+body {
+    background-image: url('../assets/images/background.jpg');
 }

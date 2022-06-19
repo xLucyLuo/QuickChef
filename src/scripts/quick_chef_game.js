@@ -1,15 +1,49 @@
-import Chef from "./chef.js"
 
-const BG_COLOR = "#FFA7B6";
-const DIM_X = 1000;
-const DIM_Y = 600;
+import Chef from "./chef.js"
+import Ingredient from "./ingredient.js"
+import Kitchenware from "./kitchenware"
+
+const BG_IMG = "../assets/images/bakery.png"
+const DIM_X = 1200;
+const DIM_Y = 800;
+const MAX_QUEUE = 2;
+
+const THEMES = {
+  bakery:{
+    ingredients: ["flour", "egg", "strawberry"],
+    kitchenwares: ["mixer", "fryer"]
+  }
+}
 
 class QuickChefGame {
   constructor(canvas) {
     this.canvas = canvas
     this.dimensions = { width: canvas.width, height: canvas.height };
     this.ctx = this.canvas.getContext("2d");
-    this.chef = new Chef(this.dimensions, this)
+    this.chef = new Chef(this)
+    //need to refactor
+    this.img = new Image();
+    this.img.src = BG_IMG;
+
+    this.ingredients = []
+    for (let i = 0; i< THEMES.bakery.ingredients.length;i++){
+      this.ingredients.push(new Ingredient(THEMES.bakery.ingredients[i], this, 0, 0, 0, 0))
+    }
+
+    this.kitchenwares = []
+    for (let i = 0; i< THEMES.bakery.kitchenwares.length;i++){
+      this.kitchenwares.push(new Kitchenware(THEMES.bakery.kitchenwares[i], this, 0, 0, 0,0))
+    }
+
+    this.queues =[[],[],[],[]] 
+    this.currQueue = 0
+
+    this.draw()
+  }
+
+  addToQueue(ingredientNum, kitchenwareNum){
+    this.queues[this.currQueue].push(new Ingredient(THEMES.bakery.ingredients[ingredientNum], this, 0, 0, 0, 0))
+    this.currQueue = (this.currQueue + 1) % this.queues.length
     this.draw()
   }
   
@@ -17,18 +51,118 @@ class QuickChefGame {
   draw(){
     // debugger
     this.ctx.clearRect(0, 0, DIM_X, DIM_Y);
-    this.ctx.fillStyle = BG_COLOR;
-    this.ctx.fillRect(0, 0, DIM_X, DIM_Y);
+
+    
+    this.ctx.drawImage(this.img, 0, 0, DIM_X, DIM_Y);
+    this.ctx.fillStyle = "#959595";
+    this.ctx.fillRect(0, DIM_Y*.85, DIM_X, DIM_Y*.15);
+   
 
     this.chef.draw()
-    // this.allObjects().forEach(function(object) {
-    //   object.draw(ctx);
-    // });
+    //draw ingredients pannels
+    this.ctx.fillStyle = "#aa7c60";
+    this.ctx.fillRect(0, 0, this.dimensions.width*0.18, DIM_Y);
+
+    let boxWidth = this.dimensions.width*0.08
+    let boxHeight = 100
+    
+    this.ctx.font = "25px Comic Sans MS";
+    this.ctx.fillStyle = "black";
+    this.ctx.textAlign = "left";
+    this.ctx.fillText("Ingredients", 5, 60);
+    
+    //ingredients x4
+    this.ctx.lineWidth = 2
+    this.ctx.strokeStyle = "#63452a"
+    this.ctx.fillStyle = "#ecd4b4";
+    for(let i = 0; i <2; i++){
+      for(let j = 0; j <2; j++){
+        let idx = i*(2)+j
+        if (this.ingredients[idx]){
+          this.ingredients[idx].x = i*(boxWidth+3)+3
+          this.ingredients[idx].y = j*(boxHeight+5)+75
+          this.ingredients[idx].width = boxWidth
+          this.ingredients[idx].height = boxHeight
+          this.ingredients[idx].draw();
+        }else{
+          this.ctx.fillRect(i*(boxWidth+3)+3, j*(boxHeight+5)+75, boxWidth, boxHeight);
+        }
+        this.ctx.strokeRect(i*(boxWidth+3)+3, j*(boxHeight+5)+75, boxWidth, boxHeight);
+        
+      }
+    }
+
+    //kitchenware x4
+    this.ctx.fillStyle = "black";
+    this.ctx.fillText("Cooking Action", 5, 350);
+    this.ctx.fillStyle = "#ecd4b4";
+
+    for(let i = 0; i <2; i++){
+      for(let j = 0; j <2; j++){
+        let idx = i*(2)+j
+        if (this.kitchenwares[idx]){
+          this.kitchenwares[idx].x = i*(boxWidth+3)+3
+          this.kitchenwares[idx].y = (j+2)*(boxHeight+5)+150
+          this.kitchenwares[idx].width = boxWidth
+          this.kitchenwares[idx].height = boxHeight
+          this.kitchenwares[idx].draw();
+        }else{
+          this.ctx.fillRect(i*(boxWidth+3)+3, (j+2)*(boxHeight+5)+150, boxWidth, boxHeight);
+        }
+        this.ctx.strokeRect(i*(boxWidth+3)+3, (j+2)*(boxHeight+5)+150, boxWidth, boxHeight);
+        
+      }
+    }
+    //assembly station
+    this.ctx.fillStyle = "black";
+    this.ctx.fillText("Assembly Station", 5, 630);
+    this.ctx.fillStyle = "#ecd4b4";
+    this.ctx.fillRect(6, boxHeight*4+240, (boxWidth-2)*2, boxHeight*1.5)
+    this.ctx.strokeRect(6, boxHeight*4+240, (boxWidth-2)*2, boxHeight*1.5)
+
+    boxWidth = this.dimensions.width*0.2
+    boxHeight = boxHeight*0.8
+    //draw timer
+    this.ctx.fillStyle = "#fef4d2";
+    this.ctx.fillRect(boxWidth*4, 0, boxWidth, boxHeight);
+    this.ctx.textAlign = "right";
+    this.ctx.font = "50px Comic Sans MS";
+    this.ctx.fillStyle = "red";
+    this.ctx.fillText("5:00", 1180, 60);
+    
+    //draw points
+    this.ctx.fillStyle = "#fdc407";
+    this.ctx.fillRect(boxWidth*4, boxHeight+2, boxWidth, boxHeight);
+    this.ctx.font = "50px Comic Sans MS";
+    this.ctx.fillStyle = "black";
+    this.ctx.fillText("$1,000", 1180, 140);
+
+    boxHeight = boxHeight/0.8*1.25
+    //draw recipe pannels
+    this.ctx.fillStyle = "#a5d6a7";
+    this.ctx.fillRect(boxWidth*4, (boxHeight+2)*2+10, boxWidth, boxHeight);
+    this.ctx.fillRect(boxWidth*4, (boxHeight+2)*3+10, boxWidth, boxHeight);
+    this.ctx.fillRect(boxWidth*4, (boxHeight+2)*4+10, boxWidth, boxHeight);
+    this.ctx.fillRect(boxWidth*4, (boxHeight+2)*5+10, boxWidth, boxHeight);
+
+    //draw ingredient queues
+    boxWidth = this.dimensions.width*0.12
+    boxHeight = boxHeight*0.5
+    this.ctx.fillStyle = "#b3e5fc";
+    for(let i = 0; i <4; i++){
+      for(let j = 0; j <2; j++){
+        if (this.queues[i][j]){
+          this.queues[i][j].x = i*(boxWidth+1)+300
+          this.queues[i][j].y = (j)*(boxHeight+5)
+          this.queues[i][j].width = boxWidth
+          this.queues[i][j].height = boxHeight
+          this.queues[i][j].draw();
+        }else{
+          this.ctx.fillRect(i*(boxWidth+1)+300, (j)*(boxHeight+5), boxWidth, boxHeight);
+        }
+      }
+    }
   }
-
-  // Game.prototype.draw = function draw(ctx) {
-
-// };
 
 }
 
