@@ -6,11 +6,17 @@ header h1{
     display: inline-block;
     color: white;
     background-color: pink;
+    padding: 30px;
     width: 100%;
-    font-size: 50px;
+    height: auto;
+    font-size: 54px;
     text-align: center;
+    font-family: 'Pacifico', cursive;
+    // -webkit-text-stroke: 1px #d04c73 ; /* width and color */
+    text-shadow: -1px 0 #5c2233, 0 1px #5c2233, 1px 0 #5c2233, 0 -1px #5c2233;
 }
 
 body {
     background-image: url('../assets/images/background.jpg');
+    width: 100%;
 }
