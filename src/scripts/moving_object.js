@@ -37,7 +37,8 @@ class MovingObject {
   }
 
   moveRight() {
-    const rightLimit = this.dimensions.width*0.80-this.width+5
+    // const rightLimit = this.dimensions.width*0.80-this.width+5
+    const rightLimit = this.dimensions.width-this.width-3
     const x2 = this.x + this.vel
     if (x2 < rightLimit){
       this.x = x2;

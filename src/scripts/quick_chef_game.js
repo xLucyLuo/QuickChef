@@ -229,7 +229,7 @@ class QuickChefGame {
     boxHeight = boxHeight*0.8
 
     //draw timer
-    let clockRadius = 70;
+    let clockRadius = 50;
     this.ctx.fillStyle = "black";
     this.ctx.beginPath();
     this.ctx.arc(DIM_X-(clockRadius+5), clockRadius+5, clockRadius, 0, 2 * Math.PI, true);
@@ -244,51 +244,53 @@ class QuickChefGame {
     // this.ctx.stroke();
 
     this.ctx.textAlign = "center";
-    this.ctx.font = "50px Comic Sans MS";
+    this.ctx.font = "40px Comic Sans MS";
     this.ctx.fillStyle = "white";
-    this.ctx.fillText(Utils.convertMsToTime(this.timeLeft), DIM_X -clockRadius, clockRadius*1.3);
+    this.ctx.fillText(Utils.convertMsToTime(this.timeLeft), DIM_X -clockRadius*1.1, clockRadius*1.3);
     
     
     //draw points
     this.ctx.fillStyle = "#fdc407";
-    this.ctx.fillRect(boxWidth*4, clockRadius*2+15, boxWidth, boxHeight);
+    this.ctx.fillRect(DIM_X-clockRadius*2.5-boxWidth*.6, clockRadius*.6, boxWidth*.6, boxHeight*.8);
     this.ctx.textAlign = "right";
-    this.ctx.font = "50px Comic Sans MS";
+    this.ctx.font = "30px Comic Sans MS";
     this.ctx.fillStyle = "black";
-    this.ctx.fillText("$1,000", boxWidth*5-10, clockRadius*3-5);
+    this.ctx.fillText("$1,000", DIM_X-clockRadius*2.5-5, clockRadius+15);
 
     boxHeight = boxHeight/0.8*1.25
     //draw recipe pannels
     this.ctx.fillStyle = "white";
-    this.ctx.fillRect(boxWidth*4,(boxHeight*1.3)*2+5, boxWidth, boxHeight/2);
+    this.ctx.fillRect(boxWidth*4,(boxHeight*1.3)+5, boxWidth, boxHeight/2);
 
     this.ctx.textAlign = "left";
     this.ctx.font = "30px Comic Sans MS";
     this.ctx.fillStyle = "black";
-    this.ctx.fillText("Orders",boxWidth*4+5,(boxHeight*1.3)*2+35);
+    this.ctx.fillText("Orders",boxWidth*4+5,(boxHeight*1.3)+35);
 
     this.ctx.fillStyle = "white";
     for (let i = 0; i < MAX_RECIPES; i++){
       this.ctx.globalAlpha = 0.7
-      this.ctx.fillRect(boxWidth*4, (boxHeight*1.3)*(i+2)+55, boxWidth, boxHeight);
+      this.ctx.fillRect(boxWidth*4, (boxHeight*1.3)*(i+1)+55, boxWidth, boxHeight);
       this.ctx.globalAlpha = 1
 
       this.recipes[i].x = boxWidth*4-10
-      this.recipes[i].y = (boxHeight*1.3)*(i+2)+55 -12
+      this.recipes[i].y = (boxHeight*1.3)*(i+1)+55 -12
       this.recipes[i].draw()
     }
 
 
-    //draw combobox
-    boxHeight = boxHeight/1.25*.8
-    this.ctx.fillStyle = "#fdc407";
-    this.ctx.fillRect(boxWidth*4, DIM_Y-boxHeight*1.2, boxWidth, boxHeight);
+    //draw serving stable
+    boxHeight = boxHeight/1.25
+    this.ctx.fillStyle = "#white";
+    this.ctx.fillRect( DIM_X-boxWidth-3,DIM_Y*.8-5, boxWidth, DIM_Y*.20);
     this.ctx.textAlign = "left";
     this.ctx.font = "25px Comic Sans MS";
     this.ctx.fillStyle = "black";
-    this.ctx.fillText(`Combo:`, boxWidth*4, DIM_Y-53);
-    this.ctx.font = "50px Comic Sans MS";
-    this.ctx.fillText(`${this.currentCombo.combo}`, boxWidth*4.3, DIM_Y-25);
+    this.ctx.fillText(`Serving Table`, boxWidth*4, DIM_Y-60);
+
+    //draw player combo
+    this.ctx.font = "25px Comic Sans MS";
+    this.ctx.fillText(`${this.currentCombo.combo}`,this.chef.x+20, this.chef.y-10);
 
     //draw ingredient queues
     boxWidth = DIM_X*0.06
