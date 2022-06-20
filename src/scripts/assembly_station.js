@@ -6,7 +6,7 @@ import Kitchenware from "./kitchenware"
 class AssemblyStation extends MovingObject{
     constructor(maxSize, game, x, y, w, h){
         const img = new Image();
-        img.src = "https://github.com/xLucyLuo/QuickChef/blob/main/assets/images/plate.png";
+        img.src = "../assets/images/plate.png";
         super(x, y, game, w, h, img)
         this.maxSize = maxSize
         this.name = "plate"

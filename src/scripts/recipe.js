@@ -9,7 +9,7 @@ const RECIPES = [
         kitchenwares:["mixer", "oven"],
         timer: 100000,
         points: 200,
-        img: "https://github.com/xLucyLuo/QuickChef/blob/main/assets/images/donut.png"
+        img: "../assets/images/donut.png"
     }
 ]
 
