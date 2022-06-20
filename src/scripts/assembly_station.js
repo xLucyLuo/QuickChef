@@ -1,7 +1,7 @@
-import Ingredient from "./ingredient.js"
-import Kitchenware from "./kitchenware.js";
+import Utils from './utils.js'
 import MovingObject from "./moving_object.js"
-
+import Ingredient from "./ingredient.js"
+import Kitchenware from "./kitchenware"
 
 class AssemblyStation extends MovingObject{
     constructor(maxSize, game, x, y, w, h){
@@ -9,13 +9,23 @@ class AssemblyStation extends MovingObject{
         img.src = "../assets/images/plate.png";
         super(x, y, game, w, h, img)
         this.maxSize = maxSize
+        this.name = "plate"
         this.vel = 0
-        this.items = []
-        // this.items = [new Ingredient("chocolate", game,0,0,0,0),new Ingredient("egg", game,0,0,0,0),new Ingredient("strawberry", game,0,0,0,0), new Ingredient("flour", game,0,0,0,0)]
+        this.heldItems = []
+        this.seq = this.name
+
+        // this.heldItems = [new Ingredient("chocolate", game,0,0,0,0),new Ingredient("egg", game,0,0,0,0),new Ingredient("strawberry", game,0,0,0,0), new Ingredient("flour", game,0,0,0,0)]
 
         // const kitchenware = new Kitchenware("oven", game,0,0,0,0)
-        // kitchenware.add([new Ingredient("chocolate", game,0,0,0,0),new Ingredient("egg", game,0,0,0,0),new Ingredient("strawberry", game,0,0,0,0), new Ingredient("flour", game,0,0,0,0)])
-        // this.items = [kitchenware,kitchenware,kitchenware,kitchenware]
+        // kitchenware.addItems([new Ingredient("chocolate", game,0,0,0,0),new Ingredient("egg", game,0,0,0,0),new Ingredient
+        // ("strawberry", game,0,0,0,0), new Ingredient("flour", game,0,0,0,0)])
+        // const kitchenware2 = new Kitchenware("mixer", game,0,0,0,0)
+        // kitchenware2.addItems([new Ingredient("chocolate", game,0,0,0,0),new Ingredient("egg", game,0,0,0,0),new Ingredient("strawberry", game,0,0,0,0), new Ingredient("flour", game,0,0,0,0)])
+        // const kitchenware3 = new Kitchenware("pan", game,0,0,0,0)
+        // kitchenware3.addItems([new Ingredient("chocolate", game,0,0,0,0),new Ingredient("egg", game,0,0,0,0),new Ingredient("strawberry", game,0,0,0,0), new Ingredient("flour", game,0,0,0,0)])
+        // const kitchenware4 = new Kitchenware("fryer", game,0,0,0,0)
+        // kitchenware4.addItems([new Ingredient("chocolate", game,0,0,0,0),new Ingredient("egg", game,0,0,0,0),new Ingredient("strawberry", game,0,0,0,0), new Ingredient("flour", game,0,0,0,0)])
+        // this.heldItems = [kitchenware,kitchenware2,kitchenware3,kitchenware4]
     }
 
     draw(){
@@ -28,42 +38,43 @@ class AssemblyStation extends MovingObject{
         this.game.ctx.fillRect(this.x, this.y, this.width, this.height);
         this.game.ctx.strokeRect(this.x, this.y, this.width, this.height);
         super.draw()
-        const numRows = 2
-        const numCol = this.maxSize/numRows
+        const numRow = 2
+        const numCol = this.maxSize/numRow
 
         
-        for (let i =0; i < numRows; i++){
+        for (let i =0; i < numRow; i++){
             for (let j=0; j < numCol; j++){
-                let idx = j*(numRows)+i
-                const itemHeight = (this.height*.9-10) / numRows - 3*numRows
-                const itemWidth = (this.width*.9-50) / numCol - 3*numCol
+                let idx = j*(numRow)+i
+                // let idx = this.heldItems.length-(j*(numRow)+i)-1
+                const itemHeight = (this.height*.87-10) / numRow - 3*numRow
+                const itemWidth = (this.width*.87-50) / numCol - 3*numCol
+
+                //can add if statement for sizing kitchenware vs ingredient
   
-                if (this.items[idx]){
-                  this.items[idx].x = i*(itemWidth*1)+this.x+40
-                  this.items[idx].y = (this.y-this.height+65) + (j+numRows)*(itemHeight*1)
-                  this.items[idx].width = itemWidth
-                  this.items[idx].height = itemHeight
-                  this.items[idx].draw();
+                if (this.heldItems[idx]){
+                  this.heldItems[idx].x = i*(itemWidth*1.3)+this.x+40
+                  this.heldItems[idx].y = (this.game.dimensions.height-itemHeight-10) - (j)*(itemHeight*1.3)
+                  this.heldItems[idx].width = itemWidth
+                  this.heldItems[idx].height = itemHeight
+                  this.heldItems[idx].draw();
                 }
             }
         }
     }
 
-    addItem(obj){
-        if(this.items.length<this.maxSize){
-            this.items.push(obj)
+    addItems(items){
+        for(let item of items){
+            if(this.heldItems.length<this.maxSize){
+                this.heldItems.push(item)
+            }
         }
-    }
-
-    addItems(objs){
-        for(let obj of objs){
-            this.addItem(obj)
-        }
+        this.seq = Utils.getSeq(this, this.heldItems)
     }
 
     removeAll(){
-        const items = this.items
-        this.items =[]
+        const items = this.heldItems
+        this.heldItems =[]
+        this.seq = ["plate"]
         return items
     }
 }

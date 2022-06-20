@@ -1,3 +1,4 @@
+import Kitchenware from "./kitchenware.js";
 import MovingObject from "./moving_object.js"
 
 const WIDTH = 110
@@ -8,26 +9,30 @@ class Chef extends MovingObject{
         const img = new Image();
         img.src = "../assets/images/chef.png";
         super(game.dimensions.width/2, game.dimensions.height - HEIGHT-5, game, WIDTH, HEIGHT, img)
-        this.itemHeld = null;
+        this.heldItem = null;
         this.vel = 10
     }
 
     catch(item){
-        this.itemHeld = item
-        this.itemHeld.vel = 0
+        if(item.name === "plate" && item.heldItems.length <2){
+            this.heldItem = item.heldItems[0]
+        }else{
+            this.heldItem = item
+        }
+        this.heldItem.vel = 0
         this.moveHeldItem();
     }
 
     throw(){
-        let item = this.itemHeld
-        this.itemHeld = null
+        let item = this.heldItem
+        this.heldItem = null
         return item
     }
 
     draw(){
         super.draw()
-        if (this.itemHeld){
-            this.itemHeld.draw();
+        if (this.heldItem){
+            this.heldItem.draw();
         }
     }
 
@@ -42,9 +47,9 @@ class Chef extends MovingObject{
     }
 
     moveHeldItem(){
-        if (this.itemHeld){
-            this.itemHeld.x = this.x-this.width/3
-            this.itemHeld.y = this.y+this.height*.4//-this.itemHeld.width
+        if (this.heldItem){
+            this.heldItem.x = this.x-this.width/3
+            this.heldItem.y = this.y+this.height*.4//-this.heldItem.width
         }
     }
 }

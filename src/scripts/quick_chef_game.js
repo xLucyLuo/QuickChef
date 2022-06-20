@@ -2,9 +2,7 @@ import Utils from './utils.js'
 import Chef from "./chef.js"
 import Ingredient from "./ingredient.js"
 import Kitchenware from "./kitchenware"
-import MovingObject from './moving_object.js'
 import AssemblyStation from './assembly_station.js'
-import Recipes from './recipe.js'
 import Recipe from './recipe.js'
 
 const BG_IMG = "../assets/images/bakery.png"
@@ -24,7 +22,7 @@ const LEFT_PANNEL_WIDTH = DIM_X*0.19
 
 const THEMES = {
   bakery:{
-    ingredients: ["flour", "egg", "strawberry", "chocolate"],
+    ingredients: ["flour", "egg", "strawberry", "chocolate","milk"],
     kitchenwares: ["mixer", "fryer", "oven", "pan"]
   }
 }
@@ -71,10 +69,17 @@ class QuickChefGame {
     setInterval(this.updateTimers.bind(this), TICK_INTERVAL);
   }
 
-  matchRecipe(item, nextAction){
-    //if item + nextAction match a recipe
+  matchRecipe(item){
+    //if item match a recipe
     //return recipe
-    //otherwise return new process key
+    //otherwise return item
+    for(let recipe of this.recipes){
+      if (item.seq === recipe.seq){
+        item.img = recipe.img
+        // item.name = recipe.name
+        item.heldItems = []
+      }
+    }
   }
 
   resetAssemblyStation(){
@@ -118,8 +123,8 @@ class QuickChefGame {
       //player catches the falling item if they touch the falling item 
       // and are not currently holding anything. Removes item from fall
       if(this.fallingObjs[i] 
-        && !this.chef.itemHeld 
-        && Utils.is_touching(this.chef, this.fallingObjs[i])){
+        && !this.chef.heldItem 
+        && Utils.isTouching(this.chef, this.fallingObjs[i])){
           this.chef.catch(this.fallingObjs[i])
           this.fallingObjs[i]=null;
       }
@@ -142,6 +147,8 @@ class QuickChefGame {
     }
 
     this.queues[minQueue].push(obj)
+    debugger
+    this.matchRecipe(obj)
     this.draw()
   }
 

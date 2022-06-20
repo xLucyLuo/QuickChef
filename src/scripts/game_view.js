@@ -44,22 +44,22 @@ class GameView{
                     break;
                 case "ArrowDown":
                     let item = game.chef.throw();
-                    if(item && Utils.is_touching(game.assemblyStation, game.chef)){
+                    if(item && Utils.isTouching(game.assemblyStation, game.chef)){
                         if (item.name === "plate"){
                             game.assemblyStation.addItems(item.heldItems)
                         }else{
-                            game.assemblyStation.addItem(item)
+                            game.assemblyStation.addItems([item])
                         }
                     }
                     break;
                 case "ArrowUp":
                     //pickup assembly station
-                    if(game.assemblyStation.items.length>0 
-                        && Utils.is_touching(game.assemblyStation, game.chef) 
-                        && !game.chef.itemHeld){
+                    if(game.assemblyStation.heldItems.length>0 
+                        && Utils.isTouching(game.assemblyStation, game.chef) 
+                        && !game.chef.heldItem){
                             let assembledItems = game.assemblyStation.removeAll()
                             const plate = new Kitchenware("plate",game,0,0,game.chef.width*.8,game.chef.height*.3)
-                            plate.add(assembledItems)
+                            plate.addItems(assembledItems)
                             game.chef.catch(plate)
                             game.resetAssemblyStation()
                     }
@@ -83,16 +83,16 @@ class GameView{
                         }
                 
                         //check if is a kitchenware combo *require player to be holding something
-                        if (game.chef.itemHeld
+                        if (game.chef.heldItem
                         && game.currentCombo.combo in KITCHENWARE_COMBOS 
                         && game.currentTheme.kitchenwares.includes(KITCHENWARE_COMBOS[game.currentCombo.combo])){
                             let kitchenwareName = KITCHENWARE_COMBOS[game.currentCombo.combo]
                             let item = game.chef.throw()
                             obj = new Kitchenware(kitchenwareName, game, 0, 0, 0, 0)
                             if (item.name === "plate"){
-                                obj.add(item.heldItems)
+                                obj.addItems(item.heldItems)
                             }else{
-                                obj.add([item])
+                                obj.addItems([item])
                             }
                         }
                         if (obj){game.addToQueue(obj)};

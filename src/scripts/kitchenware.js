@@ -1,4 +1,5 @@
 import MovingObject from "./moving_object.js"
+import Utils from './utils.js'
 
 const KITCHENWARES = {
     mixer: "../assets/images/mixer.png",
@@ -29,23 +30,25 @@ class Kitchenware extends MovingObject{
         super(x, y, game, w, h, img)
         this.name = kitchenware
         this.heldItems = []
+        this.seq = [this.name]
     }
 
-    add(items){
-        this.heldItems = items
+    addItems(items){
+        this.heldItems=items
         for (let item of this.heldItems){
             item.vel = 0
         }
+        this.seq = Utils.getSeq(this, this.heldItems)
     }
 
     draw(){
         super.draw()
         const numCol = 2
-        const numRow = this.heldItems.length/numCol
+        const numRow = Math.ceil(this.heldItems.length/numCol)
 
         for (let i=0; i < numRow; i++){
             for (let j=0; j< numCol; j++){
-                let idx = i*numRow+j
+                let idx = i+j*numRow
                 if (idx<this.heldItems.length){
                     this.heldItems[idx].width = this.width*0.5
                     this.heldItems[idx].height =this.height*0.5

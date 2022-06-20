@@ -4,7 +4,7 @@ import Kitchenware from "./kitchenware"
 const RECIPES = [
     {
         name:"strawberry donut",
-        processOrder: ["egg", "flour", "strawberry", "mixer", "oven"],
+        seq: "[oven,[[mixer,[egg,flour,strawberry]]]]",
         ingredients:["egg", "flour", "strawberry"],
         kitchenwares:["mixer", "oven"],
         timer: 100000,
@@ -22,7 +22,7 @@ class Recipe {
         this.width = w
         this.height = h
         this.name = recipe.name
-        this.process = recipe.process
+        this.seq = recipe.seq
 
         this.ingredients = []
         for(let ingredient of recipe.ingredients){
@@ -54,6 +54,10 @@ class Recipe {
             this.kitchenwares[i].y = this.y+15+this.kitchenwares[i].height
             this.kitchenwares[i].draw()
         }
+    }
+
+    copy(){
+        
     }
 
 }
