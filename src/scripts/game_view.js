@@ -2,6 +2,7 @@ import QuickChefGame from './quick_chef_game.js';
 import Ingredient from "./ingredient.js"
 import Kitchenware from "./kitchenware"
 import Utils from './utils.js';
+import AssemblyStation from './assembly_station.js'
 
 const INGREDIENT_COMBOS = {
     "wawa": 0,
@@ -44,10 +45,26 @@ class GameView{
                 case "ArrowDown":
                     let item = game.chef.throw();
                     if(item && Utils.is_touching(game.assemblyStation, game.chef)){
-                        game.assemblyStation.addItem(item)
+                        if (item.name === "plate"){
+                            game.assemblyStation.addItems(item.heldItems)
+                        }else{
+                            game.assemblyStation.addItem(item)
+                        }
                     }
                     break;
-                case "a": case "w": case "s": case "d": case "ArrowUp":
+                case "ArrowUp":
+                    //pickup assembly station
+                    if(game.assemblyStation.items.length>0 
+                        && Utils.is_touching(game.assemblyStation, game.chef) 
+                        && !game.chef.itemHeld){
+                            let assembledItems = game.assemblyStation.removeAll()
+                            const plate = new Kitchenware("plate",game,0,0,game.chef.width*.8,game.chef.height*.3)
+                            plate.add(assembledItems)
+                            game.chef.catch(plate)
+                            game.resetAssemblyStation()
+                    }
+                    break;
+                case "a": case "w": case "s": case "d":
                     if (event.repeat) { return }
                     game.currentCombo.combo+=event.key
 
@@ -67,20 +84,18 @@ class GameView{
                 
                         //check if is a kitchenware combo *require player to be holding something
                         if (game.chef.itemHeld
-                        && game.chef.itemHeld.constructor === Ingredient
                         && game.currentCombo.combo in KITCHENWARE_COMBOS 
                         && game.currentTheme.kitchenwares.includes(KITCHENWARE_COMBOS[game.currentCombo.combo])){
-                        let kitchenwareName = KITCHENWARE_COMBOS[game.currentCombo.combo]
-                        let ingredient = game.chef.throw()
-                        obj = new Kitchenware(kitchenwareName, game, 0, 0, 0, 0)
-                        obj.process(ingredient)
+                            let kitchenwareName = KITCHENWARE_COMBOS[game.currentCombo.combo]
+                            let item = game.chef.throw()
+                            obj = new Kitchenware(kitchenwareName, game, 0, 0, 0, 0)
+                            if (item.name === "plate"){
+                                obj.add(item.heldItems)
+                            }else{
+                                obj.add([item])
+                            }
                         }
                         if (obj){game.addToQueue(obj)};
-
-                        //check if it's serving
-                        if (game.currentCombo.combo = "ArrowUpArrowUpArrowUpArrowUp"){
-                            //run recipe matching logic
-                        }
                     }
                     break;
             }

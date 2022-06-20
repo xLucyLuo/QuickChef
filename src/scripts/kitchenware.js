@@ -8,6 +8,7 @@ const KITCHENWARES = {
     knife: "../assets/images/knife.png",
     pot: "../assets/images/pot.png",
     blender: "../assets/images/blender.png",
+    plate: "../assets/images/plate.png"
 }
 
 //in milliseconds
@@ -27,22 +28,32 @@ class Kitchenware extends MovingObject{
         img.src = KITCHENWARES[kitchenware]
         super(x, y, game, w, h, img)
         this.name = kitchenware
-        this.processingItem = null
+        this.heldItems = []
     }
 
-    process(ingredient){
-        this.processingItem = ingredient
-        this.processingItem.vel = 0
-        this.processingItem.width *=0.5
-        this.processingItem.height *=0.5
+    add(items){
+        this.heldItems = items
+        for (let item of this.heldItems){
+            item.vel = 0
+        }
     }
 
     draw(){
         super.draw()
-        if (this.processingItem){
-            this.processingItem.x = this.x-5
-            this.processingItem.y = this.y-5
-            this.processingItem.draw()
+        const numCol = 2
+        const numRow = this.heldItems.length/numCol
+
+        for (let i=0; i < numRow; i++){
+            for (let j=0; j< numCol; j++){
+                let idx = i+j*numCol
+                if (idx<this.heldItems.length){
+                    this.heldItems[idx].width = this.width*0.6
+                    this.heldItems[idx].height =this.height*0.6
+                    this.heldItems[idx].x = this.x -10 + this.heldItems[idx].width*i
+                    this.heldItems[idx].y = this.y+15-this.heldItems[idx].height*(j+1)
+                    this.heldItems[idx].draw()
+                }
+            }
         }
     }
 

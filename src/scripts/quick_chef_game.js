@@ -59,12 +59,15 @@ class QuickChefGame {
     }
 
     this.recipes = []
-    this.assemblyStation = new AssemblyStation(MAX_ASSEMBLY, this, 3,DIM_Y*.8-5, LEFT_PANNEL_WIDTH-8, DIM_Y*.20),
+    this.resetAssemblyStation()
 
     this.draw()
     setInterval(this.updateTimers.bind(this), TICK_INTERVAL);
   }
 
+  resetAssemblyStation(){
+    this.assemblyStation = new AssemblyStation(MAX_ASSEMBLY, this, 3,DIM_Y*.8-5, LEFT_PANNEL_WIDTH-8, DIM_Y*.20)
+  }
   updateTimers(){
     this.timeLeft-=TICK_INTERVAL
     this.resolveFall()
@@ -148,7 +151,7 @@ class QuickChefGame {
     this.ctx.fillRect(0, 0, LEFT_PANNEL_WIDTH, DIM_Y);
 
     //set dimensions for left pannel object size
-    let boxWidth = LEFT_PANNEL_WIDTH/2 - 40
+    let boxWidth = LEFT_PANNEL_WIDTH/2-10
     let boxHeight = DIM_Y*0.1
 
     //render ingredient labels
@@ -163,14 +166,14 @@ class QuickChefGame {
     this.ctx.fillStyle = "#ecd4b4";
     for(let i = 0; i <2; i++){
       for(let j = 0; j <3; j++){
-        this.ctx.fillRect(i*(boxWidth*1.3)+3, j*(boxHeight+5)+55, boxWidth, boxHeight);
-        this.ctx.strokeRect(i*(boxWidth*1.3)+3, j*(boxHeight+5)+55, boxWidth, boxHeight);
+        this.ctx.fillRect(i*(boxWidth*1.1)+3, j*(boxHeight+5)+55, boxWidth, boxHeight);
+        this.ctx.strokeRect(i*(boxWidth*1.1)+3, j*(boxHeight+5)+55, boxWidth, boxHeight);
 
         let idx = j*(2)+i
         if (this.ingredients[idx]){
-          this.ingredients[idx].x = i*(boxWidth*1.3)+3
+          this.ingredients[idx].x = i*(boxWidth*1.6*.7)+3
           this.ingredients[idx].y = j*(boxHeight+5)+55
-          this.ingredients[idx].width = boxWidth
+          this.ingredients[idx].width = boxWidth*.7
           this.ingredients[idx].height = boxHeight
           this.ingredients[idx].draw();
         }
@@ -185,14 +188,14 @@ class QuickChefGame {
     
     for(let i = 0; i <2; i++){
       for(let j = 0; j <2; j++){
-        this.ctx.fillRect(i*(boxWidth*1.3)+3, (j+3)*(boxHeight+5)+120, boxWidth, boxHeight);
-        this.ctx.strokeRect(i*(boxWidth*1.3)+3, (j+3)*(boxHeight+5)+120, boxWidth, boxHeight);
+        this.ctx.fillRect(i*(boxWidth*1.1)+3, (j+3)*(boxHeight+5)+120, boxWidth, boxHeight);
+        this.ctx.strokeRect(i*(boxWidth*1.1)+3, (j+3)*(boxHeight+5)+120, boxWidth, boxHeight);
 
         let idx = j*(2)+i
         if (this.kitchenwares[idx]){
-          this.kitchenwares[idx].x = i*(boxWidth*1.3)+3
+          this.kitchenwares[idx].x = i*(boxWidth*1.6*.7)+3
           this.kitchenwares[idx].y = (j+3)*(boxHeight+5)+120
-          this.kitchenwares[idx].width = boxWidth
+          this.kitchenwares[idx].width = boxWidth*.7
           this.kitchenwares[idx].height = boxHeight
           this.kitchenwares[idx].draw();
         }
