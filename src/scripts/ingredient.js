@@ -1,11 +1,11 @@
 import MovingObject from "./moving_object.js"
 
 const INGREDIENTS = {
-    flour: "../assets/images/flour.png",
-    egg:"../assets/images/egg.png",
-    strawberry:"../assets/images/strawberry.png",
-    chocolate:"../assets/images/chocolate.png",
-    milk:"../assets/images/milk.png"
+    flour: "https://github.com/xLucyLuo/QuickChef/blob/main/assets/images/flour.png",
+    egg:"https://github.com/xLucyLuo/QuickChef/blob/main/assets/images/egg.png",
+    strawberry:"https://github.com/xLucyLuo/QuickChef/blob/main/assets/images/strawberry.png",
+    chocolate:"https://github.com/xLucyLuo/QuickChef/blob/main/assets/images/chocolate.png",
+    milk:"https://github.com/xLucyLuo/QuickChef/blob/main/assets/images/milk.png"
 
 }
 

@@ -5,7 +5,7 @@ import Kitchenware from "./kitchenware"
 import AssemblyStation from './assembly_station.js'
 import Recipe from './recipe.js'
 
-const BG_IMG = "../assets/images/bakery.png"
+const BG_IMG = "https://github.com/xLucyLuo/QuickChef/blob/main/assets/images/bakery.png"
 const DIM_X = 1200;
 const DIM_Y = 700;
 const MAX_QUEUE = 2;

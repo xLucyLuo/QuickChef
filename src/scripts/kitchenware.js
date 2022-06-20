@@ -2,14 +2,14 @@ import MovingObject from "./moving_object.js"
 import Utils from './utils.js'
 
 const KITCHENWARES = {
-    mixer: "../assets/images/mixer.png",
-    fryer: "../assets/images/fryer.png",
-    oven: "../assets/images/oven.png",
-    pan: "../assets/images/pan.png",
-    knife: "../assets/images/knife.png",
-    pot: "../assets/images/pot.png",
-    blender: "../assets/images/blender.png",
-    plate: "../assets/images/plate.png"
+    mixer: "https://github.com/xLucyLuo/QuickChef/blob/main/assets/images/mixer.png",
+    fryer: "https://github.com/xLucyLuo/QuickChef/blob/main/assets/images/fryer.png",
+    oven: "https://github.com/xLucyLuo/QuickChef/blob/main/assets/images/oven.png",
+    pan: "https://github.com/xLucyLuo/QuickChef/blob/main/assets/images/pan.png",
+    knife: "https://github.com/xLucyLuo/QuickChef/blob/main/assets/images/knife.png",
+    pot: "https://github.com/xLucyLuo/QuickChef/blob/main/assets/images/pot.png",
+    blender: "https://github.com/xLucyLuo/QuickChef/blob/main/assets/images/blender.png",
+    plate: "https://github.com/xLucyLuo/QuickChef/blob/main/assets/images/plate.png"
 }
 
 //in milliseconds
