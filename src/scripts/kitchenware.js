@@ -45,12 +45,12 @@ class Kitchenware extends MovingObject{
 
         for (let i=0; i < numRow; i++){
             for (let j=0; j< numCol; j++){
-                let idx = i+j*numCol
+                let idx = i*numRow+j
                 if (idx<this.heldItems.length){
-                    this.heldItems[idx].width = this.width*0.6
-                    this.heldItems[idx].height =this.height*0.6
-                    this.heldItems[idx].x = this.x -10 + this.heldItems[idx].width*i
-                    this.heldItems[idx].y = this.y+15-this.heldItems[idx].height*(j+1)
+                    this.heldItems[idx].width = this.width*0.5
+                    this.heldItems[idx].height =this.height*0.5
+                    this.heldItems[idx].x = this.x -15 + this.heldItems[idx].width*0.9*i
+                    this.heldItems[idx].y = this.y+20-this.heldItems[idx].height*0.9*(j+1)
                     this.heldItems[idx].draw()
                 }
             }

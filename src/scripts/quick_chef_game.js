@@ -4,6 +4,8 @@ import Ingredient from "./ingredient.js"
 import Kitchenware from "./kitchenware"
 import MovingObject from './moving_object.js'
 import AssemblyStation from './assembly_station.js'
+import Recipes from './recipe.js'
+import Recipe from './recipe.js'
 
 const BG_IMG = "../assets/images/bakery.png"
 const DIM_X = 1200;
@@ -16,7 +18,7 @@ const GAME_TIME_LIMIT = 300000
 //1sec in milliseconds
 const COMBO_TIMER = 1000
 
-const MAX_RECIPES = 4
+const MAX_RECIPES = 3
 const MAX_ASSEMBLY = 4
 const LEFT_PANNEL_WIDTH = DIM_X*0.19
 
@@ -59,15 +61,26 @@ class QuickChefGame {
     }
 
     this.recipes = []
+    for(let i = 0; i < MAX_RECIPES; i++){
+      this.recipes.push(new Recipe(this, 950, 225+100*1.3*(i), 100, 100))
+    }
+
     this.resetAssemblyStation()
 
     this.draw()
     setInterval(this.updateTimers.bind(this), TICK_INTERVAL);
   }
 
+  matchRecipe(item, nextAction){
+    //if item + nextAction match a recipe
+    //return recipe
+    //otherwise return new process key
+  }
+
   resetAssemblyStation(){
     this.assemblyStation = new AssemblyStation(MAX_ASSEMBLY, this, 3,DIM_Y*.8-5, LEFT_PANNEL_WIDTH-8, DIM_Y*.20)
   }
+
   updateTimers(){
     this.timeLeft-=TICK_INTERVAL
     this.resolveFall()
@@ -239,11 +252,25 @@ class QuickChefGame {
 
     boxHeight = boxHeight/0.8*1.25
     //draw recipe pannels
-    this.ctx.fillStyle = "#a5d6a7";
-    this.ctx.fillRect(boxWidth*4, (boxHeight+5)*2+60, boxWidth, boxHeight);
-    this.ctx.fillRect(boxWidth*4, (boxHeight+5)*3+60, boxWidth, boxHeight);
-    this.ctx.fillRect(boxWidth*4, (boxHeight+5)*4+60, boxWidth, boxHeight);
-    this.ctx.fillRect(boxWidth*4, (boxHeight+5)*5+60, boxWidth, boxHeight);
+    this.ctx.fillStyle = "white";
+    this.ctx.fillRect(boxWidth*4,(boxHeight*1.3)*2+5, boxWidth, boxHeight/2);
+
+    this.ctx.textAlign = "left";
+    this.ctx.font = "30px Comic Sans MS";
+    this.ctx.fillStyle = "black";
+    this.ctx.fillText("Orders",boxWidth*4+5,(boxHeight*1.3)*2+35);
+
+    this.ctx.fillStyle = "white";
+    for (let i = 0; i < MAX_RECIPES; i++){
+      this.ctx.globalAlpha = 0.7
+      this.ctx.fillRect(boxWidth*4, (boxHeight*1.3)*(i+2)+55, boxWidth, boxHeight);
+      this.ctx.globalAlpha = 1
+
+      this.recipes[i].x = boxWidth*4-10
+      this.recipes[i].y = (boxHeight*1.3)*(i+2)+55 -12
+      this.recipes[i].draw()
+    }
+
 
     //draw combobox
     boxHeight = boxHeight/1.25*.8
@@ -261,14 +288,15 @@ class QuickChefGame {
     this.ctx.fillStyle = "#b3e5fc";
     for(let i = 0; i <this.queues.length; i++){
       for(let j = 0; j <MAX_QUEUE; j++){
+        this.ctx.globalAlpha = 0.5
+        this.ctx.fillRect(i*(boxWidth*1.7)+325, (1-j)*(boxHeight+5), boxWidth, boxHeight);
+        this.ctx.globalAlpha = 1
         if (this.queues[i][j]){
           this.queues[i][j].x = i*(boxWidth*1.7)+325
           this.queues[i][j].y = (1-j)*(boxHeight+5)
           this.queues[i][j].width = boxWidth
           this.queues[i][j].height = boxHeight
           this.queues[i][j].draw();
-        }else{
-          this.ctx.fillRect(i*(boxWidth*1.7)+325, (1-j)*(boxHeight+5), boxWidth, boxHeight);
         }
       }
     }
