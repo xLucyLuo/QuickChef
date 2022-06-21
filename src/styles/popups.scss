@@ -1,0 +1,21 @@
+#popup-box{
+    z-index: 999;
+    position: fixed;
+    width: 60vw;
+    /* height: 80vh; */
+    top: 5vh;
+    left: 20vw;
+    padding: 50px;
+    background: white;
+    box-shadow: 10px 10px 11px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    font-size: 18px;
+    line-height: 28px;
+    color: #3E3E3E;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  

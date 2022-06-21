@@ -23,9 +23,22 @@ const RIGHT_PANNEL_WIDTH = LEFT_PANNEL_WIDTH+10
 
 const THEMES = {
   bakery:{
-    ingredients: ["flour", "egg", "strawberry", "chocolate","milk"],
+    ingredients: ["flour", "egg", "strawberry", "chocolate", "honey", "blueberry"],
     kitchenwares: ["mixer", "fryer", "oven", "pan"]
   }
+}
+
+const KEY_IMGS = {
+  1:"../assets/images/key_1.png",
+  2:"../assets/images/key_2.png",
+  3:"../assets/images/key_3.png",
+  4:"../assets/images/key_4.png",
+  5:"../assets/images/key_5.png",
+  6:"../assets/images/key_6.png",
+  "mixer":"../assets/images/key_awds.png",
+  "fryer":"../assets/images/key_adad.png",
+  "oven":"../assets/images/key_wasd.png",
+  "pan":"../assets/images/key_swws.png"
 }
 
 class QuickChefGame {
@@ -37,16 +50,25 @@ class QuickChefGame {
     //need to refactor
     this.img = new Image();
     this.img.src = BG_IMG;
+    
+    this.keyImgs = {}
+    let keyImg
 
     this.currentTheme = THEMES.bakery
     this.ingredients = []
     for (let i = 0; i< this.currentTheme.ingredients.length;i++){
       this.ingredients.push(new Ingredient(this.currentTheme.ingredients[i], this, 0, 0, 0, 0))
+      keyImg = new Image()
+      keyImg.src = KEY_IMGS[i+1]
+      this.keyImgs[i+1]=keyImg
     }
 
     this.kitchenwares = []
     for (let i = 0; i< this.currentTheme.kitchenwares.length;i++){
       this.kitchenwares.push(new Kitchenware(this.currentTheme.kitchenwares[i], this, 0, 0, 0,0))
+      keyImg = new Image()
+      keyImg.src = KEY_IMGS[this.currentTheme.kitchenwares[i]]
+      this.keyImgs[this.currentTheme.kitchenwares[i]]=keyImg
     }
 
     this.queues =[[],[],[],[],[]] 
@@ -67,7 +89,7 @@ class QuickChefGame {
     this.resetAssemblyStation()
     
     //need to update later
-    this.servingStation = new Station(MAX_ASSEMBLY, this, DIM_X-RIGHT_PANNEL_WIDTH+5,DIM_Y*.8-5, RIGHT_PANNEL_WIDTH-8, DIM_Y*.20,"Serving Station","#ecd4b4")
+    this.servingStation = new Station(MAX_ASSEMBLY, this, DIM_X-RIGHT_PANNEL_WIDTH+5,DIM_Y*.8-5, RIGHT_PANNEL_WIDTH-8, DIM_Y*.20,"Serving Station","#949494")
 
     this.points = 0
 
@@ -104,7 +126,7 @@ class QuickChefGame {
   }
 
   resetAssemblyStation(){
-    this.assemblyStation = new Station(MAX_ASSEMBLY, this, 3,DIM_Y*.8-5, LEFT_PANNEL_WIDTH-8, DIM_Y*.20, "Assembly Station", "#ecd4b4")
+    this.assemblyStation = new Station(MAX_ASSEMBLY, this, 3,DIM_Y*.8-5, LEFT_PANNEL_WIDTH-8, DIM_Y*.20, "Assembly Station", "#949494")
   }
 
   updateTimers(){
@@ -195,7 +217,7 @@ class QuickChefGame {
     this.ctx.globalAlpha = 1
 
     //set dimensions for left pannel object size
-    let boxWidth = LEFT_PANNEL_WIDTH/2-10
+    let boxWidth = LEFT_PANNEL_WIDTH/2-20
     let boxHeight = DIM_Y*0.1
 
     //render ingredient labels
@@ -207,45 +229,67 @@ class QuickChefGame {
     //ingredients x6
     this.ctx.lineWidth = 2
     this.ctx.strokeStyle = "#63452a"
-    this.ctx.fillStyle = "#ecd4b4";
+    this.ctx.fillStyle = "white";
+    
     for(let i = 0; i <2; i++){
       for(let j = 0; j <3; j++){
-        this.ctx.fillRect(i*(boxWidth*1.1)+3, j*(boxHeight+5)+55, boxWidth, boxHeight);
-        this.ctx.strokeRect(i*(boxWidth*1.1)+3, j*(boxHeight+5)+55, boxWidth, boxHeight);
-
+        this.ctx.globalAlpha = 0.7
+        this.ctx.fillRect(i*(boxWidth*1.2)+3, j*(boxHeight+5)+55, boxWidth, boxHeight);
+        this.ctx.strokeRect(i*(boxWidth*1.2)+3, j*(boxHeight+5)+55, boxWidth, boxHeight);
+        this.ctx.globalAlpha = 1
         let idx = j*(2)+i
         if (this.ingredients[idx]){
-          this.ingredients[idx].x = i*(boxWidth*1.6*.7)+3
+          this.ingredients[idx].x = i*(boxWidth*1.2)+5
           this.ingredients[idx].y = j*(boxHeight+5)+55
           this.ingredients[idx].width = boxWidth*.7
           this.ingredients[idx].height = boxHeight
           this.ingredients[idx].draw();
         }
         
+        
+      }
+    }
+
+    //draw ingredient keys
+    for(let i = 0; i <2; i++){
+      for(let j = 0; j <3; j++){
+        let idx = j*(2)+i
+        this.ctx.drawImage(this.keyImgs[idx+1], (i+1)*(boxWidth*1.2)-33, j*(boxHeight+5)+55, boxWidth*.3, boxHeight*.4);
       }
     }
 
     //kitchenware x4
     this.ctx.fillStyle = "black";
     this.ctx.fillText("Kitchenwares", 5, boxHeight*3+120);
-    this.ctx.fillStyle = "#ecd4b4";
+    this.ctx.fillStyle = "white";
     
     for(let i = 0; i <2; i++){
       for(let j = 0; j <2; j++){
-        this.ctx.fillRect(i*(boxWidth*1.1)+3, (j+3)*(boxHeight+5)+120, boxWidth, boxHeight);
-        this.ctx.strokeRect(i*(boxWidth*1.1)+3, (j+3)*(boxHeight+5)+120, boxWidth, boxHeight);
+        this.ctx.globalAlpha = 0.7
+        this.ctx.fillRect(i*(boxWidth*1.2)+3, (j+3)*(boxHeight+5)+120, boxWidth, boxHeight);
+        this.ctx.strokeRect(i*(boxWidth*1.2)+3, (j+3)*(boxHeight+5)+120, boxWidth, boxHeight);
+        this.ctx.globalAlpha = 1
 
         let idx = j*(2)+i
         if (this.kitchenwares[idx]){
-          this.kitchenwares[idx].x = i*(boxWidth*1.6*.7)+3
+          this.kitchenwares[idx].x = i*(boxWidth*1.2)+5
           this.kitchenwares[idx].y = (j+3)*(boxHeight+5)+120
-          this.kitchenwares[idx].width = boxWidth*.7
+          this.kitchenwares[idx].width = boxWidth*.8
           this.kitchenwares[idx].height = boxHeight
           this.kitchenwares[idx].draw();
         }
         
       }
     }
+
+   //draw kitchenware keys
+   for(let i = 0; i <2; i++){
+    for(let j = 0; j <2; j++){
+      let idx = j*(2)+i
+      this.ctx.drawImage(this.keyImgs[this.kitchenwares[idx].name], (i+1)*(boxWidth*1.2)-33, (j+3)*(boxHeight+30)+30, boxWidth*.3, boxHeight*1.1);
+    }
+  }
+
     //assembly station
     this.assemblyStation.draw()
 
@@ -354,10 +398,10 @@ class QuickChefGame {
         this.ctx.fillRect(i*(boxWidth*1.7)+325, (1-j)*(boxHeight+5), boxWidth, boxHeight);
         this.ctx.globalAlpha = 1
         if (this.queues[i][j]){
-          this.queues[i][j].x = i*(boxWidth*1.7)+325
-          this.queues[i][j].y = (1-j)*(boxHeight+5)
-          this.queues[i][j].width = boxWidth
-          this.queues[i][j].height = boxHeight
+          this.queues[i][j].x = i*(boxWidth*1.7)+340
+          this.queues[i][j].y = (1-j)*(boxHeight)+15
+          this.queues[i][j].width = boxWidth*0.8
+          this.queues[i][j].height = boxHeight*0.8
           this.queues[i][j].draw();
         }
       }

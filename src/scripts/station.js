@@ -36,10 +36,14 @@ class Station extends MovingObject{
         this.game.ctx.fillStyle = this.labelColor;
         this.game.ctx.fillText(this.type, this.x+5, this.y-10);
         this.game.ctx.lineWidth = 2
-        this.game.ctx.strokeStyle = "#63452a"
+        this.game.ctx.strokeStyle = "lightblue"
         this.game.ctx.fillStyle = this.bgColor;
+        
+        this.game.ctx.globalAlpha = 0.7
         this.game.ctx.fillRect(this.x, this.y, this.width, this.height);
         this.game.ctx.strokeRect(this.x, this.y, this.width, this.height);
+        this.game.ctx.globalAlpha = 1
+
         super.draw()
         const numRow = 2
         const numCol = this.maxSize/numRow

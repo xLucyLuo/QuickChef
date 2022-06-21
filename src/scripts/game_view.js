@@ -5,12 +5,12 @@ import Utils from './utils.js';
 import AssemblyStation from './station.js'
 
 const INGREDIENT_COMBOS = {
-    "wawa": 0,
-    "wdwd": 1,
-    "awas": 2,
-    "dwds": 3,
-    "sasa": 4,
-    "sdsd": 5
+    // "wawa": 0,
+    // "wdwd": 1,
+    // "awas": 2,
+    // "dwds": 3,
+    // "sasa": 4,
+    // "sdsd": 5
   }
   
   const KITCHENWARE_COMBOS = {
@@ -73,6 +73,10 @@ class GameView{
                             game.resetAssemblyStation()
                     }
                     break;
+                case "1": case "2": case "3": case "4": case "5": case "6":
+                    let ingredientName = game.currentTheme.ingredients[parseInt(event.key)-1]
+                    game.addToQueue(new Ingredient(ingredientName, game, 0, 0, 0, 0))
+                    break;
                 case "a": case "w": case "s": case "d":
                     if (event.repeat) { return }
                     game.currentCombo.combo+=event.key
@@ -84,12 +88,12 @@ class GameView{
                     if (game.currentCombo.combo.length === 4){
                         let obj;
                 
-                        //check if is an ingredient Combo
-                        if (game.currentCombo.combo in INGREDIENT_COMBOS){
-                        let ingredientIdx = INGREDIENT_COMBOS[game.currentCombo.combo]
-                        let ingredientName = game.currentTheme.ingredients[ingredientIdx]
-                        obj = new Ingredient(ingredientName, game, 0, 0, 0, 0)
-                        }
+                        // //check if is an ingredient Combo
+                        // if (game.currentCombo.combo in INGREDIENT_COMBOS){
+                        // let ingredientIdx = INGREDIENT_COMBOS[game.currentCombo.combo]
+                        // let ingredientName = game.currentTheme.ingredients[ingredientIdx]
+                        // obj = new Ingredient(ingredientName, game, 0, 0, 0, 0)
+                        // }
                 
                         //check if is a kitchenware combo *require player to be holding something
                         if (game.chef.heldItem

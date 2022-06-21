@@ -48,7 +48,7 @@ class Chef extends MovingObject{
 
     moveHeldItem(){
         if (this.heldItem){
-            this.heldItem.x = this.x-this.width/3
+            this.heldItem.x = this.x-this.width/3+20
             this.heldItem.y = this.y+this.height*.4//-this.heldItem.width
         }
     }
