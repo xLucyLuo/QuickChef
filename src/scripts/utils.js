@@ -46,7 +46,6 @@ const Utils = {
         
         subSeq.sort()
         seq.push(subSeq)
-        console.log (this.convertArrToStr(seq))
         return this.convertArrToStr(seq)
     },
 

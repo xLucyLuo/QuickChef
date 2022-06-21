@@ -57,7 +57,7 @@ class Chef extends MovingObject{
 export default Chef
 
 // function func(){
-//     console.log("another way")
+//     .log("another way")
 // }
 
 // export default func // will not need to destructure in project import if export default

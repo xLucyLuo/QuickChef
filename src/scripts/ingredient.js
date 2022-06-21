@@ -12,7 +12,7 @@ const INGREDIENTS = {
 class Ingredient extends MovingObject{
     constructor(ingredient, game, x, y, w, h){
         const img = new Image()
-        img.src = INGREDIENTS[ingredient]
+        img.src = INGREDIENTS[ingredient];
         super(x, y, game, w, h, img)
         this.name = ingredient
         this.vel = 3

@@ -9,7 +9,16 @@ const RECIPES = [
         kitchenwares:["mixer", "oven"],
         timer: 100000,
         points: 200,
-        img: "../assets/images/donut.png"
+        img: "../assets/images/strawberry_donut.png"
+    },
+    {
+        name:"chocolate donut",
+        seq: "[oven,[[mixer,[chocolate,egg,flour]]]]",
+        ingredients:["chocolate","egg", "flour"],
+        kitchenwares:["mixer", "oven"],
+        timer: 100000,
+        points: 200,
+        img: "../assets/images/chocolate_donut.png"
     }
 ]
 

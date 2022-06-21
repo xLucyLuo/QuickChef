@@ -3,8 +3,8 @@ import MovingObject from "./moving_object.js"
 import Ingredient from "./ingredient.js"
 import Kitchenware from "./kitchenware"
 
-class AssemblyStation extends MovingObject{
-    constructor(maxSize, game, x, y, w, h){
+class Station extends MovingObject{
+    constructor(maxSize, game, x, y, w, h, type, bgColor="white", labelColor="black"){
         const img = new Image();
         img.src = "../assets/images/plate.png";
         super(x, y, game, w, h, img)
@@ -13,6 +13,9 @@ class AssemblyStation extends MovingObject{
         this.vel = 0
         this.heldItems = []
         this.seq = this.name
+        this.type = type
+        this.bgColor = bgColor
+        this.labelColor = labelColor
 
         // this.heldItems = [new Ingredient("chocolate", game,0,0,0,0),new Ingredient("egg", game,0,0,0,0),new Ingredient("strawberry", game,0,0,0,0), new Ingredient("flour", game,0,0,0,0)]
 
@@ -30,11 +33,11 @@ class AssemblyStation extends MovingObject{
 
     draw(){
         this.game.ctx.font = "25px Comic Sans MS";
-        this.game.ctx.fillStyle = "white";
-        this.game.ctx.fillText("Assembly Station", this.x+5, this.y-10);
+        this.game.ctx.fillStyle = this.labelColor;
+        this.game.ctx.fillText(this.type, this.x+5, this.y-10);
         this.game.ctx.lineWidth = 2
         this.game.ctx.strokeStyle = "#63452a"
-        this.game.ctx.fillStyle = "#ecd4b4";
+        this.game.ctx.fillStyle = this.bgColor;
         this.game.ctx.fillRect(this.x, this.y, this.width, this.height);
         this.game.ctx.strokeRect(this.x, this.y, this.width, this.height);
         super.draw()
@@ -79,4 +82,4 @@ class AssemblyStation extends MovingObject{
     }
 }
 
-export default AssemblyStation
+export default Station

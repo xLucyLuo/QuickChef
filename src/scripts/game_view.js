@@ -2,7 +2,7 @@ import QuickChefGame from './quick_chef_game.js';
 import Ingredient from "./ingredient.js"
 import Kitchenware from "./kitchenware"
 import Utils from './utils.js';
-import AssemblyStation from './assembly_station.js'
+import AssemblyStation from './station.js'
 
 const INGREDIENT_COMBOS = {
     "wawa": 0,
@@ -44,11 +44,20 @@ class GameView{
                     break;
                 case "ArrowDown":
                     let item = game.chef.throw();
+
                     if(item && Utils.isTouching(game.assemblyStation, game.chef)){
                         if (item.name === "plate"){
                             game.assemblyStation.addItems(item.heldItems)
                         }else{
                             game.assemblyStation.addItems([item])
+                        }
+                    }
+
+                    if(item && Utils.isTouching(game.servingStation, game.chef)){
+                        if (item.name === "plate"){
+                            game.serve(item.heldItems)
+                        }else{
+                            game.serve([item])
                         }
                     }
                     break;

@@ -2,7 +2,7 @@ import Utils from './utils.js'
 import Chef from "./chef.js"
 import Ingredient from "./ingredient.js"
 import Kitchenware from "./kitchenware"
-import AssemblyStation from './assembly_station.js'
+import Station from './station.js'
 import Recipe from './recipe.js'
 
 const BG_IMG = "../assets/images/bakery.png"
@@ -19,6 +19,7 @@ const COMBO_TIMER = 1000
 const MAX_RECIPES = 3
 const MAX_ASSEMBLY = 4
 const LEFT_PANNEL_WIDTH = DIM_X*0.19
+const RIGHT_PANNEL_WIDTH = LEFT_PANNEL_WIDTH+10
 
 const THEMES = {
   bakery:{
@@ -64,6 +65,11 @@ class QuickChefGame {
     }
 
     this.resetAssemblyStation()
+    
+    //need to update later
+    this.servingStation = new Station(MAX_ASSEMBLY, this, DIM_X-RIGHT_PANNEL_WIDTH+5,DIM_Y*.8-5, RIGHT_PANNEL_WIDTH-8, DIM_Y*.20,"Serving Station","#ecd4b4")
+
+    this.points = 0
 
     this.draw()
     setInterval(this.updateTimers.bind(this), TICK_INTERVAL);
@@ -71,19 +77,34 @@ class QuickChefGame {
 
   matchRecipe(item){
     //if item match a recipe
-    //return recipe
-    //otherwise return item
-    for(let recipe of this.recipes){
+    //update item image to match recipe
+    //returns recipe index match
+    for(let i =0; i< this.recipes.length; i++){
+      let recipe = this.recipes[i]
       if (item.seq === recipe.seq){
         item.img = recipe.img
         // item.name = recipe.name
         item.heldItems = []
+        return i
       }
     }
+    return -1
+  }
+
+  serve(items){
+    for(let i=0; i<items.length; i++){
+      let recipeIdx = this.matchRecipe(items[i])
+      if (recipeIdx !== -1){
+        this.points+=this.recipes[recipeIdx].points
+        this.recipes[recipeIdx] = new Recipe(this, 950, 225+100*1.3*(i), 100, 100)
+      }
+    }
+
+    this.servingStation.removeAll()
   }
 
   resetAssemblyStation(){
-    this.assemblyStation = new AssemblyStation(MAX_ASSEMBLY, this, 3,DIM_Y*.8-5, LEFT_PANNEL_WIDTH-8, DIM_Y*.20)
+    this.assemblyStation = new Station(MAX_ASSEMBLY, this, 3,DIM_Y*.8-5, LEFT_PANNEL_WIDTH-8, DIM_Y*.20, "Assembly Station", "#ecd4b4")
   }
 
   updateTimers(){
@@ -147,7 +168,7 @@ class QuickChefGame {
     }
 
     this.queues[minQueue].push(obj)
-    debugger
+    // debugger
     this.matchRecipe(obj)
     this.draw()
   }
@@ -166,9 +187,12 @@ class QuickChefGame {
     this.ctx.fillStyle = "#959595";
     this.ctx.fillRect(0, DIM_Y*.9, DIM_X, DIM_Y*.1);
 
-    //draw ingredients pannels
-    this.ctx.fillStyle = "#aa7c60";
+    //draw left pannel
+    this.ctx.globalAlpha = 0.7
+    // this.ctx.fillStyle = "#aa7c60";
+    this.ctx.fillStyle = "white";
     this.ctx.fillRect(0, 0, LEFT_PANNEL_WIDTH, DIM_Y);
+    this.ctx.globalAlpha = 1
 
     //set dimensions for left pannel object size
     let boxWidth = LEFT_PANNEL_WIDTH/2-10
@@ -176,7 +200,7 @@ class QuickChefGame {
 
     //render ingredient labels
     this.ctx.font = "25px Comic Sans MS";
-    this.ctx.fillStyle = "white";
+    this.ctx.fillStyle = "black";
     this.ctx.textAlign = "left";
     this.ctx.fillText("Ingredients", 5, 40);
     
@@ -202,7 +226,7 @@ class QuickChefGame {
     }
 
     //kitchenware x4
-    this.ctx.fillStyle = "white";
+    this.ctx.fillStyle = "black";
     this.ctx.fillText("Kitchenwares", 5, boxHeight*3+120);
     this.ctx.fillStyle = "#ecd4b4";
     
@@ -228,45 +252,72 @@ class QuickChefGame {
     boxWidth = this.dimensions.width*0.2
     boxHeight = boxHeight*0.8
 
+    //draw right pannel
+    this.ctx.globalAlpha = 0.7
+    this.ctx.fillStyle = "white";
+    this.ctx.fillRect(DIM_X - RIGHT_PANNEL_WIDTH, 0, RIGHT_PANNEL_WIDTH, DIM_Y);
+    this.ctx.globalAlpha = 1
+
     //draw timer
     let clockRadius = 50;
     this.ctx.fillStyle = "black";
-    this.ctx.beginPath();
-    this.ctx.arc(DIM_X-(clockRadius+5), clockRadius+5, clockRadius, 0, 2 * Math.PI, true);
-    this.ctx.fill();
+    
+    const timerImg = new Image()
+    timerImg.src = "../assets/images/timer.png";
+    this.ctx.drawImage(timerImg, DIM_X-clockRadius*2.5, 0, clockRadius*2.5, clockRadius*2.5);
 
-    this.ctx.fillStyle = "#207567";
-    // this.ctx.fillRect(boxWidth*4, 0, boxWidth, boxHeight);
-    this.ctx.beginPath();
-    this.ctx.arc(DIM_X-(clockRadius+5), clockRadius+5, clockRadius, (Math.PI*1.5), (Math.PI*2)*(1-this.timeLeft/GAME_TIME_LIMIT)+(Math.PI*1.5) , true)
-    this.ctx.lineTo(DIM_X-(clockRadius+5),clockRadius+5)
-    this.ctx.fill();
-    // this.ctx.stroke();
-
+    // this.ctx.beginPath();
+    // this.ctx.arc(DIM_X-(clockRadius+5), clockRadius+5, clockRadius, 0, 2 * Math.PI, true);
+    // this.ctx.fill();
+    
+    // this.ctx.fillStyle = "#207567";
+    // // this.ctx.fillRect(boxWidth*4, 0, boxWidth, boxHeight);
+    // this.ctx.beginPath();
+    // this.ctx.arc(DIM_X-(clockRadius+5), clockRadius+5, clockRadius, (Math.PI*1.5), (Math.PI*2)*(1-this.timeLeft/GAME_TIME_LIMIT)+(Math.PI*1.5) , true)
+    // this.ctx.lineTo(DIM_X-(clockRadius+5),clockRadius+5)
+    // this.ctx.fill();
+    // // this.ctx.stroke();
+    
     this.ctx.textAlign = "center";
     this.ctx.font = "40px Comic Sans MS";
-    this.ctx.fillStyle = "white";
-    this.ctx.fillText(Utils.convertMsToTime(this.timeLeft), DIM_X -clockRadius*1.1, clockRadius*1.3);
+    // this.ctx.shadowBlur = 3;
+    // this.ctx.shadowColor = "#000000";
+    this.ctx.fillStyle = "black";
+    if (this.timeLeft<10000){
+      this.ctx.fillStyle = "red";
+    }
+    this.ctx.fillText(Utils.convertMsToTime(this.timeLeft), DIM_X -clockRadius*1.25, clockRadius+35);
+    this.ctx.shadowBlur = 0;
     
     
     //draw points
-    this.ctx.fillStyle = "#fdc407";
-    this.ctx.fillRect(DIM_X-clockRadius*2.5-boxWidth*.6, clockRadius*.6, boxWidth*.6, boxHeight*.8);
-    this.ctx.textAlign = "right";
-    this.ctx.font = "30px Comic Sans MS";
+    const coinImg = new Image()
+    coinImg.src = "../assets/images/coin.png";
+    this.ctx.drawImage(coinImg, DIM_X-clockRadius*5-8, 0, clockRadius*2.5, clockRadius*2.5);
+    this.ctx.textAlign = "center";
+    this.ctx.lineWidth = 0.5;
+    this.ctx.strokeStyle = "#3F1414";
+    this.ctx.font = "40px Comic Sans MS";
+    // this.ctx.fontWeight = "bolder";
+    // this.ctx.shadowBlur = 3;
+    // this.ctx.shadowColor = "#000000";
     this.ctx.fillStyle = "black";
-    this.ctx.fillText("$1,000", DIM_X-clockRadius*2.5-5, clockRadius+15);
+    this.ctx.fillText(`$${this.points.toLocaleString()}`, DIM_X-clockRadius*4, clockRadius+30);
+    this.ctx.shadowBlur = 0;
+    // this.ctx.strokeText(`$${this.points.toLocaleString()}`, DIM_X-clockRadius*4, clockRadius+25);
+
 
     boxHeight = boxHeight/0.8*1.25
     //draw recipe pannels
-    this.ctx.fillStyle = "white";
-    this.ctx.fillRect(boxWidth*4,(boxHeight*1.3)+5, boxWidth, boxHeight/2);
+    // this.ctx.fillStyle = "white";
+    // this.ctx.fillRect(boxWidth*4,(boxHeight*1.3)+5, boxWidth, boxHeight/2);
 
     this.ctx.textAlign = "left";
-    this.ctx.font = "30px Comic Sans MS";
+    this.ctx.font = "25px Comic Sans MS";
     this.ctx.fillStyle = "black";
     this.ctx.fillText("Orders",boxWidth*4+5,(boxHeight*1.3)+35);
 
+    // this.ctx.fillStyle = "#5fb15f";
     this.ctx.fillStyle = "white";
     for (let i = 0; i < MAX_RECIPES; i++){
       this.ctx.globalAlpha = 0.7
@@ -281,14 +332,16 @@ class QuickChefGame {
 
     //draw serving stable
     boxHeight = boxHeight/1.25
-    this.ctx.fillStyle = "#white";
-    this.ctx.fillRect( DIM_X-boxWidth-3,DIM_Y*.8-5, boxWidth, DIM_Y*.20);
-    this.ctx.textAlign = "left";
-    this.ctx.font = "25px Comic Sans MS";
-    this.ctx.fillStyle = "black";
-    this.ctx.fillText(`Serving Table`, boxWidth*4, DIM_Y-60);
+    // this.ctx.fillStyle = "#white";
+    // this.ctx.fillRect( DIM_X-boxWidth-3,DIM_Y*.8-5, boxWidth, DIM_Y*.20);
+    // this.ctx.textAlign = "left";
+    // this.ctx.font = "25px Comic Sans MS";
+    // this.ctx.fillStyle = "black";
+    // this.ctx.fillText(`Serving Table`, boxWidth*4, DIM_Y-60);
+    this.servingStation.draw()
 
     //draw player combo
+    this.ctx.fillStyle = "black";
     this.ctx.font = "25px Comic Sans MS";
     this.ctx.fillText(`${this.currentCombo.combo}`,this.chef.x+20, this.chef.y-10);
 
@@ -374,7 +427,7 @@ export default QuickChefGame
 //     //we see if they have scored a point by passing a pipe
 //     this.level.passedPipe(this.bird.bounds(), () => {
 //       this.score += 1;
-//       console.log(this.score);
+//       .log(this.score);
 //     });
 
 //     //and draw the score
