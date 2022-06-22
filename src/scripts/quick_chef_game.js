@@ -5,7 +5,7 @@ import Kitchenware from "./kitchenware"
 import Station from './station.js'
 import Recipe from './recipe.js'
 
-const BG_IMG = "../assets/images/bakery.png"
+const BG_IMG = "assets/images/bakery.png"
 const DIM_X = 1200;
 const DIM_Y = 700;
 const MAX_QUEUE = 2;
@@ -29,16 +29,16 @@ const THEMES = {
 }
 
 const KEY_IMGS = {
-  1:"../assets/images/key_1.png",
-  2:"../assets/images/key_2.png",
-  3:"../assets/images/key_3.png",
-  4:"../assets/images/key_4.png",
-  5:"../assets/images/key_5.png",
-  6:"../assets/images/key_6.png",
-  "mixer":"../assets/images/key_awds.png",
-  "fryer":"../assets/images/key_adad.png",
-  "oven":"../assets/images/key_wasd.png",
-  "pan":"../assets/images/key_swws.png"
+  1:"assets/images/key_1.png",
+  2:"assets/images/key_2.png",
+  3:"assets/images/key_3.png",
+  4:"assets/images/key_4.png",
+  5:"assets/images/key_5.png",
+  6:"assets/images/key_6.png",
+  "mixer":"assets/images/key_awds.png",
+  "fryer":"assets/images/key_adad.png",
+  "oven":"assets/images/key_wasd.png",
+  "pan":"assets/images/key_swws.png"
 }
 
 class QuickChefGame {
@@ -307,7 +307,7 @@ class QuickChefGame {
     this.ctx.fillStyle = "black";
     
     const timerImg = new Image()
-    timerImg.src = "../assets/images/timer.png";
+    timerImg.src = "assets/images/timer.png";
     this.ctx.drawImage(timerImg, DIM_X-clockRadius*2.5, 0, clockRadius*2.5, clockRadius*2.5);
 
     // this.ctx.beginPath();
@@ -336,7 +336,7 @@ class QuickChefGame {
     
     //draw points
     const coinImg = new Image()
-    coinImg.src = "../assets/images/coin.png";
+    coinImg.src = "assets/images/coin.png";
     this.ctx.drawImage(coinImg, DIM_X-clockRadius*5-8, 0, clockRadius*2.5, clockRadius*2.5);
     this.ctx.textAlign = "center";
     this.ctx.lineWidth = 0.5;

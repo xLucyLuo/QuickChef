@@ -1,13 +1,13 @@
 import MovingObject from "./moving_object.js"
 
 const INGREDIENTS = {
-    flour: "../assets/images/flour.png",
-    egg:"../assets/images/egg.png",
-    strawberry:"../assets/images/strawberry.png",
-    chocolate:"../assets/images/chocolate.png",
-    honey:"../assets/images/honey.png",
-    milk:"../assets/images/milk.png",
-    blueberry:"../assets/images/blueberry.png"
+    flour: "assets/images/flour.png",
+    egg:"assets/images/egg.png",
+    strawberry:"assets/images/strawberry.png",
+    chocolate:"assets/images/chocolate.png",
+    honey:"assets/images/honey.png",
+    milk:"assets/images/milk.png",
+    blueberry:"assets/images/blueberry.png"
 }
 
 class Ingredient extends MovingObject{

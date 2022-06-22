@@ -9,7 +9,7 @@ const RECIPES = [
         kitchenwares:["mixer", "fryer"],
         timer: 100000,
         points: 15,
-        img: "../assets/images/strawberry_donut.png"
+        img: "assets/images/strawberry_donut.png"
     },
     {
         name:"chocolate donut",
@@ -18,7 +18,7 @@ const RECIPES = [
         kitchenwares:["mixer", "fryer"],
         timer: 100000,
         points: 15,
-        img: "../assets/images/chocolate_donut.png"
+        img: "assets/images/chocolate_donut.png"
     },
     {
         name:"honey donut",
@@ -27,7 +27,7 @@ const RECIPES = [
         kitchenwares:["mixer", "fryer"],
         timer: 100000,
         points: 15,
-        img: "../assets/images/honey_donut.png"
+        img: "assets/images/honey_donut.png"
     },
     {
         name:"pancake",
@@ -36,7 +36,7 @@ const RECIPES = [
         kitchenwares:["mixer", "pan"],
         timer: 100000,
         points: 12,
-        img: "../assets/images/pancake.png"
+        img: "assets/images/pancake.png"
     },
     // {
     //     name:"hot chocolate",
@@ -45,7 +45,7 @@ const RECIPES = [
     //     kitchenwares:["pot"],
     //     timer: 100000,
     //     points: 120,
-    //     img: "../assets/images/hot_chocolate.png"
+    //     img: "assets/images/hot_chocolate.png"
     // },
     {
         name:"blueberry pie",
@@ -54,7 +54,7 @@ const RECIPES = [
         kitchenwares:["mixer", "oven"],
         timer: 100000,
         points: 15,
-        img: "../assets/images/blueberry_pie.png"
+        img: "assets/images/blueberry_pie.png"
     },
     {
         name:"chocolate_cake",
@@ -63,7 +63,7 @@ const RECIPES = [
         kitchenwares:["mixer", "oven"],
         timer: 100000,
         points: 20,
-        img: "../assets/images/chocolate_cake.png"
+        img: "assets/images/chocolate_cake.png"
     }
 ]
 

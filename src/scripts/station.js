@@ -6,7 +6,7 @@ import Kitchenware from "./kitchenware"
 class Station extends MovingObject{
     constructor(maxSize, game, x, y, w, h, type, bgColor="white", labelColor="black"){
         const img = new Image();
-        img.src = "../assets/images/plate.png";
+        img.src = "assets/images/plate.png";
         super(x, y, game, w, h, img)
         this.maxSize = maxSize
         this.name = "plate"

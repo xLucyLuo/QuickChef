@@ -7,7 +7,7 @@ const HEIGHT = 150
 class Chef extends MovingObject{
     constructor(game){
         const img = new Image();
-        img.src = "../assets/images/chef.png";
+        img.src = "assets/images/chef.png";
         super(game.dimensions.width/2, game.dimensions.height - HEIGHT-5, game, WIDTH, HEIGHT, img)
         this.heldItem = null;
         this.vel = 10

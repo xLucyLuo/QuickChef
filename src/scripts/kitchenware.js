@@ -2,14 +2,14 @@ import MovingObject from "./moving_object.js"
 import Utils from './utils.js'
 
 const KITCHENWARES = {
-    mixer: "../assets/images/mixer.png",
-    fryer: "../assets/images/fryer.png",
-    oven: "../assets/images/oven.png",
-    pan: "../assets/images/pan.png",
-    knife: "../assets/images/knife.png",
-    pot: "../assets/images/pot.png",
-    blender: "../assets/images/blender.png",
-    plate: "../assets/images/plate.png"
+    mixer: "assets/images/mixer.png",
+    fryer: "assets/images/fryer.png",
+    oven: "assets/images/oven.png",
+    pan: "assets/images/pan.png",
+    knife: "assets/images/knife.png",
+    pot: "assets/images/pot.png",
+    blender: "assets/images/blender.png",
+    plate: "assets/images/plate.png"
 }
 
 //in milliseconds
