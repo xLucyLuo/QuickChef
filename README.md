@@ -9,7 +9,7 @@
 + At any time, the Player can serves held item(s), which will either increase points and generate a new recipe if it matches an order, otherwise everything is thrown out.
 
 <ins>**Additional Features:**</ins>
-+ Music:
++ **Music:**
     + Background music will change/speed-up depending on the time remaining (Tone.js).
     + various sound effects will play on different actions.
     + Player can mute the music at any time.
