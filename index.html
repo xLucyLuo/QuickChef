@@ -10,56 +10,86 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Amaranth&family=Carter+One&family=Hind:wght@500&family=Lemonada:wght@300&family=Pacifico&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Dongle&display=swap" rel="stylesheet">
+    
     <script src="./dist/main.js"></script>
     <title>Quick Chef</title>
   </head>
-
-  <!-- <div id="popup-box">
-  <h1 class="game-title">Quick Chef</h1>
-  <div id="game-description">
-    <p><strong>Welcome</strong> to your new bakery! It's the gand opening and customers are lined up to order! The next 5 min will be critical to your future success. Take as many orders and make as much money as you can to become the best restaurant on the block!
-  </p>
-
-  <div id="game-instruction">
-    <div id="instruction-1">
-      <p>Use the number pad 1-6 to que up recipes</p>
-      <img src="../assets/introduction/intro_order.png" alt="order-image">
-    </div>
-
-    <div id="instruction-2">
-      <p>Use the left and right arrow keys to move and pickup ingredients one at a time.</p>
-      <img src="../assets/introduction/intro_choose_item.png" alt="choose-image">
-    </div>
-
-    <div id="instruction-3">
-      <p>backspace or click "Remove" to deselect</p>
-      <img src="../assets/introduction/intro_deselect_item.png" alt="deselect-image">
-    </div>
+  
+  <div id="popup-box">
+    <h1 class="game-title">Quick Chef</h1>
+    <br>
+    <img id="popup-img" src="assets/images/popup-img.png" alt="chef-img">
+    <div>
+      <div id="game-description">
+        <p><strong>Welcome</strong> to your new bakery! It's the gand opening and customers are lined up to order. The next 5 min will be critical to your future success. Take as many orders and make as much money as you can to become the best restaurant on the block!
+        </p>
+        <br>
+      </div>
+      <div id="game-instruction">
+        <ol>
+          <li>Use the number pad [1]-[6] to que up recipes.</li>
+          <li>Use the [left] and [right] arrow keys to move and pickup ingredients one at a time. 
+          <li>Use the [down] arrow key to drop what you are holding.</li>
+          <li>Collect ingredients by dropping them in the Assembly Station to the left.</li>
+          <li>Use the [up] arrow to pick-up incredients from the Assembly Station.</li>
+          <li>Use [a],[w],[s],[d] to combo 4 key in order to process held ingredients.</li>
+          <li>Serve orders by dropping them in the Serving Station to the right.</li>
+        </ol>
+      </div>
+      <div id="endgame-message" style ="display:none">
+        <div>
+          <p>Game Over!</p>
+          <p id="end-score"></p>
+          <br>
+          <a 
+            class="medium icon" 
+            href="https://github.com/xLucyLuo"
+            target="_blank">
+            <img src="assets/images/github.png" alt="github-icon">
+          </a>
+          <a 
+            class="medium icon" 
+            href="https://www.linkedin.com/in/lucy-luo-280a3952/"
+            target="_blank">
+            <img src="assets/images/linkedin.png" alt="linkedin-icon">
+          </a>
+        </div>
+      </div>
   </div>
+  
+  <button id="start-button">START GAME!</button>
 
-  <body>
   </div>
-    <button id="start-button">START GAME!</button>
-  </div> -->
 
   <header>
       <h1 class="game-title">Quick Chef</h1>
       
-      <div class="links">
-        <a 
-          class="medium icon" 
-          href="https://github.com/xLucyLuo"
-          target="_blank">
-            <img src="assets/images/github.png" alt="github-icon">
-        </a>
-        <a 
-          class="medium icon" 
-          href="https://www.linkedin.com/in/lucy-luo-280a3952/"
-          target="_blank">
-          <img src="assets/images/linkedin.png" alt="linkedin-icon">
-        </a>
-      </div>
+      <nav>
+        <div class="links">
+          <a 
+            class="medium icon" 
+            href="https://github.com/xLucyLuo"
+            target="_blank">
+              <img src="assets/images/github.png" alt="github-icon">
+          </a>
+          <a 
+            class="medium icon" 
+            href="https://www.linkedin.com/in/lucy-luo-280a3952/"
+            target="_blank">
+            <img src="assets/images/linkedin.png" alt="linkedin-icon">
+          </a>
+        </div>
+  
+        <div class="game-controls">
+          <div id="sound-toggle">
+            <label>
+              <img src="assets/images/unmuted.png" alt="sound-icon">
+              <p>Mute</p>
+            </label>
+          </div>
+        </div>
+      </nav>
 
       <!-- <nav>
         <audio controls>
@@ -77,9 +107,12 @@
       </nav> -->
   </header>
 
-
-
+  <body>
       <canvas id="cooking-table" width=1200 height=700></canvas>
+
+      <div class="round-time-bar" data-style="smooth" style="--duration: 5;">
+        <div></div>
+      </div>
   </body>
 
 </html>

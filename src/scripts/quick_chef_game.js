@@ -12,7 +12,7 @@ const MAX_QUEUE = 2;
 //1sec in milliseconds
 const TICK_INTERVAL = 50
 //5min in milliseconds
-const GAME_TIME_LIMIT = 300000
+const GAME_TIME_LIMIT = 300000*.3
 //1sec in milliseconds
 const COMBO_TIMER = 1000
 
@@ -42,10 +42,12 @@ const KEY_IMGS = {
 }
 
 class QuickChefGame {
-  constructor(canvas) {
+
+  constructor(canvas, player1, player2, player3) {
     this.canvas = canvas
     this.dimensions = { width: canvas.width, height: canvas.height };
     this.ctx = this.canvas.getContext("2d");
+
     this.chef = new Chef(this)
     //need to refactor
     this.img = new Image();
@@ -74,27 +76,60 @@ class QuickChefGame {
     this.queues =[[],[],[],[],[]] 
     this.fallingObjs = [null,null,null,null,null]
 
-    this.timeLeft = GAME_TIME_LIMIT
-
+    
     this.currentCombo = {
       combo: "",
       timer: COMBO_TIMER
     }
-
+    
     this.recipes = []
     for(let i = 0; i < MAX_RECIPES; i++){
       this.recipes.push(new Recipe(this, 950, 225+100*1.3*(i), 100, 100))
     }
-
+    
     this.resetAssemblyStation()
     
     //need to update later
     this.servingStation = new Station(MAX_ASSEMBLY, this, DIM_X-RIGHT_PANNEL_WIDTH+5,DIM_Y*.8-5, RIGHT_PANNEL_WIDTH-8, DIM_Y*.20,"Serving Station","#949494")
-
+    
     this.points = 0
-
+    
     this.draw()
-    setInterval(this.updateTimers.bind(this), TICK_INTERVAL);
+
+    this.timeLeft = GAME_TIME_LIMIT
+    this.gameTimer = setInterval(this.updateTimers.bind(this), TICK_INTERVAL);
+
+      
+    this.player1 = player1
+    this.player2 = player2
+    this.player3 = player3
+
+    console.log(this.player3)
+
+    //fade in miliseconds
+    const fade = 5000
+    // this.player1.fadeIn = fade/1000
+    this.player1.fadeOut = fade/1000
+    this.player2.fadeIn = fade/1000/2
+    this.player2.fadeOut = fade/1000
+    this.player3.fadeIn = fade/1000/2
+    player3.fadeOut = fade/1000/2
+
+    this.playerInterval = setInterval(()=>{
+      // console.log(this.timeLeft)
+      // console.log(`player 1 ${this.player1.state}`)
+      // console.log(`player 2 ${this.player2.state}`)
+      // console.log(`player 3 ${this.player3.state}`)
+
+      if(this.timeLeft >= GAME_TIME_LIMIT*0.6 && this.player1.state === "stopped"){
+        this.player1.start(0,0,GAME_TIME_LIMIT/1000*0.4+fade/1000)
+      }else if (this.timeLeft >= GAME_TIME_LIMIT*0.2  && this.timeLeft<=GAME_TIME_LIMIT*0.6 && this.player2.state === "stopped"){
+        // console.log(`chk: ${this.timeLeft/1000}`)
+        this.player2.start(0,0,GAME_TIME_LIMIT/1000*0.4+fade/1000);    
+      }else if (this.timeLeft <= GAME_TIME_LIMIT*0.2 && this.player3.state === "stopped"){
+        this.player3.start(0,0.5,GAME_TIME_LIMIT/1000*0.2); 
+      }
+    }, 1000)
   }
 
   matchRecipe(item){
@@ -117,6 +152,8 @@ class QuickChefGame {
     for(let i=0; i<items.length; i++){
       let recipeIdx = this.matchRecipe(items[i])
       if (recipeIdx !== -1){
+        let audio = new Audio("assets/audio/coin.wav");
+        audio.play();
         this.points+=this.recipes[recipeIdx].points
         this.recipes[recipeIdx] = new Recipe(this, 950, 225+100*1.3*(i), 100, 100)
       }
@@ -130,12 +167,12 @@ class QuickChefGame {
   }
 
   updateTimers(){
-    this.timeLeft-=TICK_INTERVAL
     this.resolveFall()
     this.resolveComboTimer()
-
+    
     this.draw()
     if (this.timeLeft ===0){this.end()}
+    this.timeLeft-=TICK_INTERVAL
   }
 
   resolveComboTimer(){
@@ -168,6 +205,8 @@ class QuickChefGame {
       if(this.fallingObjs[i] 
         && !this.chef.heldItem 
         && Utils.isTouching(this.chef, this.fallingObjs[i])){
+          let audio = new Audio("assets/audio/pickup.mp3");
+          audio.play();
           this.chef.catch(this.fallingObjs[i])
           this.fallingObjs[i]=null;
       }
@@ -197,7 +236,21 @@ class QuickChefGame {
 
   end(){
     //refactor for better message with stats etc.
-    alert("Game Over!")
+    clearInterval(this.gameTimer)
+    clearInterval(this.playerInterval)
+    this.player1.stop()
+    this.player2.stop()
+    this.player3.stop()
+ 
+    const startButton = document.getElementById("start-button")
+    const popupBox = document.getElementById("popup-box")
+    const endMsg = document.getElementById("endgame-message")
+    const endScoreMsg = document.getElementById("end-score")
+
+    popupBox.style.display = "flex"
+    startButton.innerText = "PLAY AGAIN!"
+    endMsg.style.display = "inline-block"
+    endScoreMsg.innerText = `Money Earned: $${this.points.toLocaleString()}`
     //reset game....
   }  
 
@@ -213,7 +266,7 @@ class QuickChefGame {
     this.ctx.globalAlpha = 0.7
     // this.ctx.fillStyle = "#aa7c60";
     this.ctx.fillStyle = "white";
-    this.ctx.fillRect(0, 0, LEFT_PANNEL_WIDTH, DIM_Y);
+    this.ctx.fillRect(0, 0, LEFT_PANNEL_WIDTH, DIM_Y*.8-5);
     this.ctx.globalAlpha = 1
 
     //set dimensions for left pannel object size
@@ -224,7 +277,7 @@ class QuickChefGame {
     this.ctx.font = "25px Comic Sans MS";
     this.ctx.fillStyle = "black";
     this.ctx.textAlign = "left";
-    this.ctx.fillText("Ingredients", 5, 40);
+    this.ctx.fillText("Ingredients", 5, 30);
     
     //ingredients x6
     this.ctx.lineWidth = 2
@@ -260,7 +313,7 @@ class QuickChefGame {
 
     //kitchenware x4
     this.ctx.fillStyle = "black";
-    this.ctx.fillText("Kitchenwares", 5, boxHeight*3+120);
+    this.ctx.fillText("Kitchenwares", 5, boxHeight*3+110);
     this.ctx.fillStyle = "white";
     
     for(let i = 0; i <2; i++){
@@ -299,7 +352,7 @@ class QuickChefGame {
     //draw right pannel
     this.ctx.globalAlpha = 0.7
     this.ctx.fillStyle = "white";
-    this.ctx.fillRect(DIM_X - RIGHT_PANNEL_WIDTH, 0, RIGHT_PANNEL_WIDTH, DIM_Y);
+    this.ctx.fillRect(DIM_X - RIGHT_PANNEL_WIDTH, 0, RIGHT_PANNEL_WIDTH, DIM_Y*.8-5);
     this.ctx.globalAlpha = 1
 
     //draw timer
@@ -327,10 +380,12 @@ class QuickChefGame {
     // this.ctx.shadowBlur = 3;
     // this.ctx.shadowColor = "#000000";
     this.ctx.fillStyle = "black";
-    if (this.timeLeft<10000){
+    if (this.timeLeft<11000){
       this.ctx.fillStyle = "red";
     }
-    this.ctx.fillText(Utils.convertMsToTime(this.timeLeft), DIM_X -clockRadius*1.25, clockRadius+35);
+    if (this.timeLeft){
+      this.ctx.fillText(Utils.convertMsToTime(this.timeLeft), DIM_X -clockRadius*1.25, clockRadius+35);
+    }
     this.ctx.shadowBlur = 0;
     
     
@@ -385,9 +440,14 @@ class QuickChefGame {
     this.servingStation.draw()
 
     //draw player combo
+    // this.ctx.fillStyle = "white";
+    // this.ctx.strokeStyle = "yellow";
+    // this.ctx.fillRect(this.chef.x+10+100*0, this.chef.y-30+110*0, 90, 25);
+    // this.ctx.strokeRect(this.chef.x+10+100*0, this.chef.y-30+110*0, 90, 25);
+
     this.ctx.fillStyle = "black";
     this.ctx.font = "25px Comic Sans MS";
-    this.ctx.fillText(`${this.currentCombo.combo}`,this.chef.x+20, this.chef.y-10);
+    this.ctx.fillText(`${this.currentCombo.combo}`,this.chef.x+20+100*0, this.chef.y-10+110*0);
 
     //draw ingredient queues
     boxWidth = DIM_X*0.06
@@ -420,181 +480,3 @@ class QuickChefGame {
 }
 
 export default QuickChefGame
-
-//   play() {
-//     this.running = true;
-//     this.animate();
-//   }
-
-//   restart() {
-//     this.running = false;
-//     this.score = 0;
-//     this.bird = new Bird(this.dimensions);
-//     this.level = new Level(this.dimensions);
-
-//     this.animate();
-//   }
-
-//   registerEvents() {
-//     this.boundClickHandler = this.click.bind(this);
-//     this.ctx.canvas.addEventListener("mousedown", this.boundClickHandler);
-//   }
-
-//   click(e) {
-//     if (!this.running) {
-//       this.play();
-//     } 
-//     this.bird.flap();
-//   }
-
-//   gameOver() {
-//     return (
-//       this.level.collidesWith(this.bird.bounds()) || this.bird.outOfBounds(this.height)
-//     );
-//   }
-
-//   //this is the key method of gaming action
-//   //animate tells the game to advance one bit
-//   //the bird moves, the level moves
-//   //everything is redrawn to the screen
-//   animate() {
-//     //first we move and draw the level
-//     this.level.animate(this.ctx);
-//     //then we move and draw the bird
-//     this.bird.animate(this.ctx);
-//     //then we check to see if the game is over and let the player know
-//     if (this.gameOver()) {
-//       alert(this.score);
-//       this.restart();
-//     }
-
-//     //we see if they have scored a point by passing a pipe
-//     this.level.passedPipe(this.bird.bounds(), () => {
-//       this.score += 1;
-//       .log(this.score);
-//     });
-
-//     //and draw the score
-//     this.drawScore();
-
-//     //if the game is NOT running, we do not animate the next frame
-//     if (this.running) {
-//       //This calls this function again, after around 1/60th of a second
-//       requestAnimationFrame(this.animate.bind(this));
-//     }
-//   }
-
-//   drawScore() {
-//     //loc will be the location 
-//     const loc = {x: this.dimensions.width / 2, y: this.dimensions.height / 4}
-//     this.ctx.font = "bold 50pt serif";
-//     this.ctx.fillStyle = "white";
-//     this.ctx.fillText(this.score, loc.x, loc.y);
-//     this.ctx.strokeStyle = "black";
-//     this.ctx.lineWidth = 2;
-//     this.ctx.strokeText(this.score, loc.x, loc.y);
-//   }
-// }
-
-
-// Game.FPS = 32;
-// Game.NUM_ASTEROIDS = 10;
-
-// Game.prototype.add = function add(object) {
-//   if (object instanceof Asteroid) {
-//     this.asteroids.push(object);
-//   } else if (object instanceof Bullet) {
-//     this.bullets.push(object);
-//   } else if (object instanceof Ship) {
-//     this.ships.push(object);
-//   } else {
-//     throw new Error("unknown type of object");
-//   }
-// };
-
-// Game.prototype.addAsteroids = function addAsteroids() {
-//   for (let i = 0; i < Game.NUM_ASTEROIDS; i++) {
-//     this.add(new Asteroid({ game: this }));
-//   }
-// };
-
-// Game.prototype.addShip = function addShip() {
-//   const ship = new Ship({
-//     pos: this.randomPosition(),
-//     game: this
-//   });
-
-//   this.add(ship);
-
-//   return ship;
-// };
-
-// Game.prototype.allObjects = function allObjects() {
-//   return [].concat(this.ships, this.asteroids, this.bullets);
-// };
-
-// Game.prototype.checkCollisions = function checkCollisions() {
-//   const allObjects = this.allObjects();
-//   for (let i = 0; i < allObjects.length; i++) {
-//     for (let j = 0; j < allObjects.length; j++) {
-//       const obj1 = allObjects[i];
-//       const obj2 = allObjects[j];
-
-//       if (obj1.isCollidedWith(obj2)) {
-//         const collision = obj1.collideWith(obj2);
-//         if (collision) return;
-//       }
-//     }
-//   }
-// };
-
-// Game.prototype.draw = function draw(ctx) {
-//   ctx.clearRect(0, 0, Game.DIM_X, Game.DIM_Y);
-//   ctx.fillStyle = Game.BG_COLOR;
-//   ctx.fillRect(0, 0, Game.DIM_X, Game.DIM_Y);
-
-//   this.allObjects().forEach(function(object) {
-//     object.draw(ctx);
-//   });
-// };
-
-// Game.prototype.isOutOfBounds = function isOutOfBounds(pos) {
-//   return (pos[0] < 0) || (pos[1] < 0) ||
-//     (pos[0] > Game.DIM_X) || (pos[1] > Game.DIM_Y);
-// };
-
-// Game.prototype.moveObjects = function moveObjects(delta) {
-//   this.allObjects().forEach(function(object) {
-//     object.move(delta);
-//   });
-// };
-
-// Game.prototype.randomPosition = function randomPosition() {
-//   return [
-//     Game.DIM_X * Math.random(),
-//     Game.DIM_Y * Math.random()
-//   ];
-// };
-
-// Game.prototype.remove = function remove(object) {
-//   if (object instanceof Bullet) {
-//     this.bullets.splice(this.bullets.indexOf(object), 1);
-//   } else if (object instanceof Asteroid) {
-//     this.asteroids.splice(this.asteroids.indexOf(object), 1);
-//   } else if (object instanceof Ship) {
-//     this.ships.splice(this.ships.indexOf(object), 1);
-//   } else {
-//     throw new Error("unknown type of object");
-//   }
-// };
-
-// Game.prototype.step = function step(delta) {
-//   this.moveObjects(delta);
-//   this.checkCollisions();
-// };
-
-// Game.prototype.wrap = function wrap(pos) {
-//   return [
-//     Util.wrap(pos[0], Game.DIM_X), Util.wrap(pos[1], Game.DIM_Y)
-//   ];
-// };

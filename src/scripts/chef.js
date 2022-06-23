@@ -10,7 +10,7 @@ class Chef extends MovingObject{
         img.src = "assets/images/chef.png";
         super(game.dimensions.width/2, game.dimensions.height - HEIGHT-5, game, WIDTH, HEIGHT, img)
         this.heldItem = null;
-        this.vel = 10
+        this.vel = 30
     }
 
     catch(item){
@@ -48,8 +48,8 @@ class Chef extends MovingObject{
 
     moveHeldItem(){
         if (this.heldItem){
-            this.heldItem.x = this.x-this.width/3+20
-            this.heldItem.y = this.y+this.height*.4//-this.heldItem.width
+            this.heldItem.x = this.x-this.width/3.3+3
+            this.heldItem.y = this.y+this.height*.4+20//-this.heldItem.width
         }
     }
 }

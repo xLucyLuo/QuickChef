@@ -3,8 +3,6 @@ import Ingredient from "./ingredient.js"
 import Kitchenware from "./kitchenware"
 import Utils from './utils.js';
 import AssemblyStation from './station.js'
-import * as Tone from 'tone'
-
 
 const INGREDIENT_COMBOS = {
     // "wawa": 0,
@@ -33,9 +31,11 @@ class GameView{
         // debugger
         this.bindKeyHandlers()
     }
+
     
     bindKeyHandlers() {
         const game = this.game;
+
         document.addEventListener('keydown', function(event) {
             switch (event.key) {
                 case "ArrowLeft":
@@ -115,36 +115,17 @@ class GameView{
                     break;
             }
         }),
-        document.addEventListener("click", function(){
-            const player1 = new Tone.Player("https://xlucyluo.github.io/QuickChef/assets/audio/countdown1.mp3").toDestination()
-            const player2 = new Tone.Player("https://xlucyluo.github.io/QuickChef/assets/audio/countdown2.mp3").toDestination()
-            const player3 = new Tone.Player("https://xlucyluo.github.io/QuickChef/assets/audio/countdown3.mp3").toDestination()
+      
+        document.addEventListener("click", () => {
+            const button = document.querySelector("#restart-button");
+            const bars = document.querySelectorAll(".round-time-bar");
+            bars.forEach((bar) => {
+                bar.classList.remove("round-time-bar");
+                bar.offsetWidth;
+                bar.classList.add("round-time-bar");
+            });
+        });
 
-            if (!Tone.start()){
-              Tone.start()
-            }
-            player1.fadeIn = 5
-            player1.fadeOut = 5
-            player2.fadeIn = 5
-            player2.fadeOut = 5
-            player3.fadeIn = 5
-            player3.fadeOut = 5
-        
-            let timer = 35
-        
-            setInterval(()=>{
-              if(timer ===35){
-                player1.start(0,0,15)
-              }else if (timer ===25){
-                player2.start(0,0,15);    
-              }else if (timer ===15){
-                player3.start(0,0,15); 
-              }else if (timer ===-1){
-                timer = 35
-              }
-              timer -=1
-            }, 1000)
-          })
     }
 }
 

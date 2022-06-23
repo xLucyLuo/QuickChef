@@ -25,6 +25,7 @@ time, mark, audio, video {
   font: inherit;
   vertical-align: baseline;
   text-decoration: none;
+  text-align: inherit;
 }
 
 /* HTML5 display-role reset for older browsers */
@@ -35,10 +36,6 @@ footer, header, hgroup, menu, nav, section {
 
 body {
   line-height: 1;
-}
-
-ol, ul {
-  list-style: none;
 }
 
 blockquote, q {
@@ -62,56 +59,185 @@ canvas#cooking-table {
   display: block;
 }
 
+.round-time-bar {
+  margin: 1rem;
+  overflow: hidden;
+  position: absolute;
+}
+
+.round-time-bar div {
+  height: 5px;
+  animation: roundtime calc(var(--duration) * 1s) steps(var(--duration)) forwards;
+  transform-origin: left center;
+  background: linear-gradient(to bottom, red, #900);
+}
+
+.round-time-bar[data-style=smooth] div {
+  animation: roundtime calc(var(--duration) * 1s) linear forwards;
+}
+
+.round-time-bar[data-color=blue] div {
+  background: linear-gradient(to bottom, #64b5f6, #1565c0);
+}
+
+@keyframes roundtime {
+  to {
+    /* More performant than `width` */
+    transform: scaleX(0);
+  }
+}
 #popup-box {
   z-index: 999;
   position: fixed;
-  width: 60vw;
+  width: 55vw;
   /* height: 80vh; */
-  top: 5vh;
+  top: 25vh;
   left: 20vw;
-  padding: 50px;
-  background: white;
+  padding: 30px;
+  background-color: rgba(255, 255, 255, 0.7);
   box-shadow: 10px 10px 11px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
-  font-size: 18px;
+  font-size: 30px;
   line-height: 28px;
   color: #3E3E3E;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  font-family: "Dongle", sans-serif;
+}
+
+#popup-box div {
+  background-color: rgba(255, 255, 255, 0.7);
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+}
+
+#popup-box .game-title {
+  font-family: "Pacifico", cursive;
+  margin-bottom: 30px;
+  font-size: 50px;
+  color: #d04c73;
+  text-shadow: 10px 10px 10px grey;
+  -webkit-text-stroke: 1px pink; /* width and color */
+}
+
+div#endgame-message div {
+  text-align: center;
+  display: inline-block;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+}
+
+div#endgame-message p {
+  padding-top: 20px;
+  margin-top: 20px;
+}
+
+div#game-instruction ol {
+  display: inline-block;
+  text-align: left;
+  padding-left: 40px;
+}
+
+#popup-img {
+  z-index: 1;
+  position: absolute;
+  width: 30%;
+  height: auto;
+  right: 0;
+  bottom: 0;
+}
+
+#start-button {
+  width: 300px;
+  height: 54px;
+  font-size: 25px;
+  background-color: #d04c73;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5);
+  color: white;
+  border-radius: 20px;
+  border-color: white;
+  margin: 30px 0px;
+  position: relative;
+  cursor: pointer;
+}
+
+#start-button:hover {
+  background: #742a40;
+  top: 10px;
+  -webkit-box-shadow: inset 0px 0px 5px #c1c1c1;
+  -moz-box-shadow: inset 0px 0px 5px #c1c1c1;
+  box-shadow: inset 0px 0px 5px #c1c1c1;
+  outline: none;
+  box-shadow: none;
 }
 
 header {
-  display: flex;
+  display: block;
   justify-content: space-between;
   flex-wrap: wrap;
   color: white;
   background-color: pink;
   padding: 10px;
   width: 100%;
+  height: auto;
 }
 
 header h1 {
   width: 100%;
-  font-size: 54px;
+  font-size: 64px;
   text-align: center;
   font-family: "Pacifico", cursive;
-  text-shadow: -1px 0 #5c2233, 0 1px #5c2233, 1px 0 #5c2233, 0 -1px #5c2233;
-  margin-bottom: 20px;
+  -webkit-text-stroke: 1px #d04c73; /* width and color */
+  text-shadow: 10px 10px 10px #5c2233;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  border-radius: 30px;
+}
+
+header nav {
   margin-top: 20px;
+  display: flex;
 }
 
 header .links {
-  width: 100%;
   height: auto;
-  align-self: center;
-  justify-content: center;
-  text-align: center;
-  margin: 10;
+  text-align: left;
+  padding-left: 20vw;
+  width: 50%;
+}
+
+header .links img {
+  width: 72px;
+  height: auto;
 }
 
 body {
   background-image: url("../assets/images/background.jpg");
   width: 100%;
+}
+
+.game-controls img {
+  width: 50px;
+  height: auto;
+}
+
+.game-controls {
+  display: flex;
+  color: black;
+  height: auto;
+  align-items: right;
+  justify-content: right;
+  width: 50%;
+  margin-right: 25vw;
+}
+
+.game-controls div {
+  text-align: center;
+  width: 30px;
+  display: flex;
+  justify-content: center;
 }
