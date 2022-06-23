@@ -31,6 +31,7 @@
 - Click Mode/Controls (full functionality without keyboard for mobile compatibility)
 - Top Scoreboard (back-end)
 - Different restaurant themes to choose from with own set recipes, required ingredients and kitchenware
+- Clearer instructions with gifs for actions/ explaining interface/ logic, etc.
 - Timer for orders/recipes
 
 
