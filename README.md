@@ -29,7 +29,7 @@
 
 ![Game Interface](https://github.com/xLucyLuo/QuickChef/blob/main/assets/images/game_interface.png)
 
-![Game Over Interface](https://github.com/xLucyLuo/QuickChef/blob/main/assets/images/game_over.png)
+![Game Over Interface](https://github.com/xLucyLuo/QuickChef/blob/main/assets/images/gameover_interface.png)
 
 
 # Bonus Features
