@@ -15,10 +15,6 @@ Other features:
     + Player can mute the music at any time.
 
 
-# Game Interface
-
-![Game Interface](https://github.com/xLucyLuo/QuickChef/blob/main/assets/images/game_interface.png)
-
 # Technologies, Libraries, APIs
 
 - Canvas API to render images and moving objects
@@ -28,30 +24,16 @@ Other features:
 - Sass to bring variables to stylesheets
 
 
-# Implementation Timeline
+# Game Interface
 
-### Friday Afternoon & Weekend
-- Key-bind for selecting various ingredient & various action
-- Queue for ingredient drop
-- Ingredient drop animation & pick up animation
-- Player movement
-- Matching logic for serving/tossing
-- Random ingredient generator
-- Collect basic recipe & ingredients
+![Intro Interface](https://github.com/xLucyLuo/QuickChef/blob/main/assets/images/intro_interface.png)
 
-### Monday
-- Timer logic and point system
-- Collecting graphics
-- Implementing Graphics
-### Tuesday
-- Re-queuing of tossed items
-- Implementing other API comments (music/sound, pause)
-### Wednesday
-- top score board
-- testing & touchup
-### Thursday Morning
-- testing & touchup
+![Game Interface](https://github.com/xLucyLuo/QuickChef/blob/main/assets/images/game_interface.png)
+
+![Game Over Interface](https://github.com/xLucyLuo/QuickChef/blob/main/assets/images/game_over.png)
+
 
 # Bonus Features
-- multiplayer (co-op)
-- multiplayer (competitive)
+- Multiplayer Mode (co-op / competitive)
+- Click Mode (full functionality without keyboard for mobile compatibility)
+- Top Scoreboard (back-end)
