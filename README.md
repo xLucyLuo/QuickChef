@@ -8,7 +8,7 @@
 + To "complete" a recipe, the Player will need to collect the required ingredients and chain processing actions in the correct order (sequence key generation & matching logic)
 + At any time, the Player can serves held item(s), which will either increase points and generate a new recipe if it matches an order, otherwise everything is thrown out.
 
-**Additional Features:**
+<ins>**Additional Features:**</ins>
 + Music:
     + Background music will change/speed-up depending on the time remaining (Tone.js).
     + various sound effects will play on different actions.
