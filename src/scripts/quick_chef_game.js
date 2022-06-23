@@ -12,7 +12,7 @@ const MAX_QUEUE = 2;
 //1sec in milliseconds
 const TICK_INTERVAL = 50
 //5min in milliseconds
-const GAME_TIME_LIMIT = 300000*.3
+const GAME_TIME_LIMIT = 300000//*.10
 //1sec in milliseconds
 const COMBO_TIMER = 1000
 
@@ -114,13 +114,12 @@ class QuickChefGame {
     this.player2.fadeOut = fade/1000
     this.player3.fadeIn = fade/1000/2
     player3.fadeOut = fade/1000/2
-
     this.playerInterval = setInterval(()=>{
       // console.log(this.timeLeft)
       // console.log(`player 1 ${this.player1.state}`)
       // console.log(`player 2 ${this.player2.state}`)
       // console.log(`player 3 ${this.player3.state}`)
-
+  
       if(this.timeLeft >= GAME_TIME_LIMIT*0.6 && this.player1.state === "stopped"){
         this.player1.start(0,0,GAME_TIME_LIMIT/1000*0.4+fade/1000)
       }else if (this.timeLeft >= GAME_TIME_LIMIT*0.2  && this.timeLeft<=GAME_TIME_LIMIT*0.6 && this.player2.state === "stopped"){
@@ -130,8 +129,9 @@ class QuickChefGame {
         this.player3.start(0,0.5,GAME_TIME_LIMIT/1000*0.2); 
       }
     }, 1000)
-  }
 
+  }
+  
   matchRecipe(item){
     //if item match a recipe
     //update item image to match recipe
@@ -251,7 +251,7 @@ class QuickChefGame {
     startButton.innerText = "PLAY AGAIN!"
     endMsg.style.display = "inline-block"
     endScoreMsg.innerText = `Money Earned: $${this.points.toLocaleString()}`
-    //reset game....
+    
   }  
 
   draw(){
