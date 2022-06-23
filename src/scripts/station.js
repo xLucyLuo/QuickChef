@@ -36,7 +36,7 @@ class Station extends MovingObject{
         this.game.ctx.fillStyle = this.labelColor;
         this.game.ctx.fillText(this.type.toUpperCase(), this.x+5, this.y-10);
         this.game.ctx.lineWidth = 4
-        this.game.ctx.strokeStyle = "yellow"
+        this.game.ctx.strokeStyle = "#fffd01";
         this.game.ctx.setLineDash([20, 10]);/*dashes are 5px and spaces are 3px*/
         this.game.ctx.beginPath();
         this.game.ctx.moveTo(0,100);
