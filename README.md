@@ -15,15 +15,17 @@ Other features:
     + Player can mute the music at any time.
 
 
-# Wireframes
+# Game Interface
 
-![Wireframe](https://github.com/xLucyLuo/QuickChef/blob/main/Wireframe.png)
+![Game Interface](https://github.com/xLucyLuo/QuickChef/tree/main/assets/images/game_interface.png)
 
 # Technologies, Libraries, APIs
 
-- Canvas API (incl. sprites)
-- Keymaster
-- potential local database for registering top player scores
+- Canvas API to render images and moving objects
+- Tone.js library to control three different background music (fading, overlaying, timing, muting)
+- Webpack and Babel to bundle and transpile the source JavaScript code
+- npm to manage project dependencies
+- Sass to bring variables to stylesheets
 
 
 # Implementation Timeline
