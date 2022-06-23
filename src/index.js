@@ -25,37 +25,19 @@ document.addEventListener("DOMContentLoaded", function () {
     const player1 = new Tone.Player("https://xlucyluo.github.io/QuickChef/assets/audio/countdown1.mp3").toDestination()
     const player2 = new Tone.Player("https://xlucyluo.github.io/QuickChef/assets/audio/countdown2.mp3").toDestination()
     const player3 = new Tone.Player("https://xlucyluo.github.io/QuickChef/assets/audio/countdown3.mp3").toDestination()
-    
+
     if (!Tone.start()){
       Tone.start()
     }
+
+    player1.volume.value = 0
+    player2.volume.value = 0
+    player3.volume.value = 0
     
     const quickChefGame = new QuickChefGame(canvas, player1, player2, player3);
     const gameView = new GameView(quickChefGame, ctx);
     
-    const soundToggleImg = document.querySelector("#sound-toggle img")
-    soundToggleImg.value = "unmuted"
-    const soundTogglePara = document.querySelector("#sound-toggle p")
-    soundToggleImg.addEventListener("click", () => {
-
-      if(soundToggleImg.value === "unmuted"){
-        soundToggleImg.value="muted" 
-        soundToggleImg.src="assets/images/muted.png" 
-        soundTogglePara.innerText="Unmute"
-        player1.mute = true
-        player2.mute = true
-        player3.mute = true
-
-      }else{
-        soundToggleImg.value="unmuted" 
-        soundToggleImg.src="assets/images/unmuted.png" 
-        soundTogglePara.innerText = "Mute"
-        player1.mute = false
-        player2.mute = false
-        player3.mute = false
-
-      }
-    })
+    
   })
   
 

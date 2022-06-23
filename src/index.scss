@@ -70,11 +70,33 @@ body {
     width: 50%;
     margin-right:25vw;
 }
+
 .game-controls div {
     // position: absolute;
     text-align: center;
     width:30px;
     display: flex;
     justify-content: center;
+    font-family: Arial;
+}
+
+strong.red-font{
+    color:red;
+    font-weight: bold;
+}
+
+strong.blue-font{
+    color:rgb(37, 124, 206);
+    font-weight: bold;
+}
+
+strong.brown-font{
+    color:#da8a6d;
+    font-weight: bold;
+}
+
+strong.green-font{
+    color:green;
+    font-weight: bold;
 }
 

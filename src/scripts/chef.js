@@ -10,7 +10,9 @@ class Chef extends MovingObject{
         img.src = "assets/images/chef.png";
         super(game.dimensions.width/2, game.dimensions.height - HEIGHT-5, game, WIDTH, HEIGHT, img)
         this.heldItem = null;
-        this.vel = 30
+        this.vel = 10
+        this.isJumping = false
+        this.isMoving = false
     }
 
     catch(item){
@@ -37,14 +39,65 @@ class Chef extends MovingObject{
     }
 
     moveLeft() {
-        super.moveLeft()
-        this.moveHeldItem();
+        let that = this;
+        this.isMoving = false
+        if(!this.isMoving){
+            for(let i = 0; i < 4; i++){
+                setTimeout(()=>{
+                    if (that.x - that.vel >= 0){
+                        that.x -= that.vel;
+                    }
+                    that.moveHeldItem()
+                }, 100*(i+1))
+            }
+            setTimeout(()=>{this.isMoving = false}, 100*5)
+        }
     }
     
     moveRight() {
-        super.moveRight()
+        // super.moveRight()
+        let that = this;
+        this.isMoving = false
+        if(!this.isMoving){
+            for(let i = 0; i < 4; i++){
+                setTimeout(()=>{
+                    const rightLimit = that.dimensions.width-that.width-3
+                    const x2 = that.x + that.vel
+                    if (x2 < rightLimit){
+                    that.x = x2;
+                    }
+                    that.moveHeldItem();
+                }, 100*(i+1))
+            }
+            setTimeout(()=>{this.isMoving = false}, 100*5)
+        }
+    }
+
+    moveUp() {
+        this.y = this.y - this.vel*4;
         this.moveHeldItem();
     }
+
+    moveDown() {
+        this.y = this.y + this.vel*4;
+        this.moveHeldItem();
+    }
+
+    jump() {
+
+        if(!this.isJumping){
+            this.isJumping = true
+            for(let i = 0; i < 8; i++){
+                setTimeout(this.moveUp.bind(this), 20*(i+1))
+            }
+            for(let i = 0; i < 8; i++){
+                setTimeout(this.moveDown.bind(this), 20*(i+1)*2)
+            }
+    
+            setTimeout(()=>{this.isJumping = false}, 20*8*2)
+        }
+    }
+
 
     moveHeldItem(){
         if (this.heldItem){

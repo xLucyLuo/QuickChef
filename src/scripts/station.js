@@ -32,9 +32,9 @@ class Station extends MovingObject{
     }
 
     draw(){
-        this.game.ctx.font = "25px Comic Sans MS";
+        this.game.ctx.font = "25px Gill Sans, sans-serif";
         this.game.ctx.fillStyle = this.labelColor;
-        this.game.ctx.fillText(this.type, this.x+5, this.y-10);
+        this.game.ctx.fillText(this.type.toUpperCase(), this.x+5, this.y-10);
         this.game.ctx.lineWidth = 4
         this.game.ctx.strokeStyle = "yellow"
         this.game.ctx.setLineDash([20, 10]);/*dashes are 5px and spaces are 3px*/

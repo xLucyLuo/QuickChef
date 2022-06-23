@@ -38,6 +38,10 @@ class GameView{
 
         document.addEventListener('keydown', function(event) {
             switch (event.key) {
+                case ' ':
+                    game.chef.jump()
+                    // setTimeout(game.chef.jump(),1000)
+                    break;
                 case "ArrowLeft":
                     game.chef.moveLeft()
                     break;
@@ -45,6 +49,8 @@ class GameView{
                     game.chef.moveRight()
                     break;
                 case "ArrowDown":
+                    let audio = new Audio("assets/audio/drop.wav");
+                    audio.play();
                     let item = game.chef.throw();
 
                     if(item && Utils.isTouching(game.assemblyStation, game.chef)){
@@ -101,6 +107,9 @@ class GameView{
                         if (game.chef.heldItem
                         && game.currentCombo.combo in KITCHENWARE_COMBOS 
                         && game.currentTheme.kitchenwares.includes(KITCHENWARE_COMBOS[game.currentCombo.combo])){
+                            let audio = new Audio("assets/audio/cook.mp3");
+                            audio.volume = 1;
+                            audio.play();
                             let kitchenwareName = KITCHENWARE_COMBOS[game.currentCombo.combo]
                             let item = game.chef.throw()
                             obj = new Kitchenware(kitchenwareName, game, 0, 0, 0, 0)
@@ -115,7 +124,7 @@ class GameView{
                     break;
             }
         }),
-      
+        
         document.addEventListener("click", () => {
             const button = document.querySelector("#restart-button");
             const bars = document.querySelectorAll(".round-time-bar");
@@ -123,8 +132,10 @@ class GameView{
                 bar.classList.remove("round-time-bar");
                 bar.offsetWidth;
                 bar.classList.add("round-time-bar");
-            });
-        });
+            })
+        })
+
+
 
     }
 }

@@ -12,7 +12,7 @@ const MAX_QUEUE = 2;
 //1sec in milliseconds
 const TICK_INTERVAL = 50
 //5min in milliseconds
-const GAME_TIME_LIMIT = 300000//*.10
+const GAME_TIME_LIMIT = 300000*.1
 //1sec in milliseconds
 const COMBO_TIMER = 1000
 
@@ -130,6 +130,36 @@ class QuickChefGame {
       }
     }, 1000)
 
+    this.resetSoundEvent()
+
+  }
+
+  resetSoundEvent(){
+    this.soundToggleImg = document.querySelector("#sound-toggle img")
+    this.soundToggleImg.value = "unmuted"
+    this.soundTogglePara = document.querySelector("#sound-toggle p")
+
+
+    this.soundEvent = this.soundToggleImg.addEventListener("click", () => {
+    
+      if(this.soundToggleImg.value === "unmuted"){
+        this.soundToggleImg.value="muted" 
+        this.soundToggleImg.src="assets/images/muted.png" 
+        this.soundTogglePara.innerText="Unmute"
+        this.player1.mute = true
+        this.player2.mute = true
+        this.player3.mute = true
+
+      }else{
+        this.soundToggleImg.value="unmuted" 
+        this.soundToggleImg.src="assets/images/unmuted.png" 
+        this.soundTogglePara.innerText = "Mute"
+        this.player1.mute = false
+        this.player2.mute = false
+        this.player3.mute = false
+
+      }
+    })
   }
   
   matchRecipe(item){
@@ -252,7 +282,10 @@ class QuickChefGame {
     endMsg.style.display = "inline-block"
     endScoreMsg.innerText = `Money Earned: $${this.points.toLocaleString()}`
     
+    this.resetSoundEvent()
   }  
+
+  
 
   draw(){
     this.ctx.clearRect(0, 0, DIM_X, DIM_Y);
@@ -274,10 +307,10 @@ class QuickChefGame {
     let boxHeight = DIM_Y*0.1
 
     //render ingredient labels
-    this.ctx.font = "25px Comic Sans MS";
+    this.ctx.font = "25px Arial";
     this.ctx.fillStyle = "black";
     this.ctx.textAlign = "left";
-    this.ctx.fillText("Ingredients", 5, 30);
+    this.ctx.fillText("INGREDIENTS", 5, 30);
     
     //ingredients x6
     this.ctx.lineWidth = 2
@@ -313,7 +346,7 @@ class QuickChefGame {
 
     //kitchenware x4
     this.ctx.fillStyle = "black";
-    this.ctx.fillText("Kitchenwares", 5, boxHeight*3+110);
+    this.ctx.fillText("KITCHENWARES", 5, boxHeight*3+110);
     this.ctx.fillStyle = "white";
     
     for(let i = 0; i <2; i++){
@@ -396,7 +429,7 @@ class QuickChefGame {
     this.ctx.textAlign = "center";
     this.ctx.lineWidth = 0.5;
     this.ctx.strokeStyle = "#3F1414";
-    this.ctx.font = "40px Comic Sans MS";
+    this.ctx.font = "40px Georgia, serif";
     // this.ctx.fontWeight = "bolder";
     // this.ctx.shadowBlur = 3;
     // this.ctx.shadowColor = "#000000";
@@ -412,9 +445,9 @@ class QuickChefGame {
     // this.ctx.fillRect(boxWidth*4,(boxHeight*1.3)+5, boxWidth, boxHeight/2);
 
     this.ctx.textAlign = "left";
-    this.ctx.font = "25px Comic Sans MS";
+    this.ctx.font = "25px Arial";
     this.ctx.fillStyle = "black";
-    this.ctx.fillText("Orders",boxWidth*4+5,(boxHeight*1.3)+35);
+    this.ctx.fillText("ORDERS",boxWidth*4+5,(boxHeight*1.3)+35);
 
     // this.ctx.fillStyle = "#5fb15f";
     this.ctx.fillStyle = "white";
@@ -446,7 +479,7 @@ class QuickChefGame {
     // this.ctx.strokeRect(this.chef.x+10+100*0, this.chef.y-30+110*0, 90, 25);
 
     this.ctx.fillStyle = "black";
-    this.ctx.font = "25px Comic Sans MS";
+    this.ctx.font = "25px Arial";
     this.ctx.fillText(`${this.currentCombo.combo}`,this.chef.x+20+100*0, this.chef.y-10+110*0);
 
     //draw ingredient queues
