@@ -112,8 +112,8 @@ class QuickChefGame {
     this.player1.fadeOut = fade/1000
     this.player2.fadeIn = fade/1000/2
     this.player2.fadeOut = fade/1000
-    this.player3.fadeIn = fade/1000/2
-    player3.fadeOut = fade/1000/2
+    // this.player3.fadeIn = fade/1000/2
+    // player3.fadeOut = fade/1000/2
     this.playerInterval = setInterval(()=>{
       // console.log(this.timeLeft)
       // console.log(`player 1 ${this.player1.state}`)
