@@ -9,7 +9,7 @@ class Chef extends MovingObject{
         const img = new Image();
         img.src = "assets/images/chef.png";
         super(game.dimensions.width/2, game.dimensions.height - HEIGHT-5, game, WIDTH, HEIGHT, img)
-        this.heldItem = null;
+        this.heldItems = null;
         this.vel = 10
         this.isJumping = false
         this.isMoving = false
@@ -48,9 +48,9 @@ class Chef extends MovingObject{
                         that.x -= that.vel;
                     }
                     that.moveHeldItem()
-                }, 100*(i+1))
+                }, 50*(i+1))
             }
-            setTimeout(()=>{this.isMoving = false}, 100*5)
+            setTimeout(()=>{this.isMoving = false}, 50*5)
         }
     }
     
@@ -67,9 +67,9 @@ class Chef extends MovingObject{
                     that.x = x2;
                     }
                     that.moveHeldItem();
-                }, 100*(i+1))
+                }, 50*(i+1))
             }
-            setTimeout(()=>{this.isMoving = false}, 100*5)
+            setTimeout(()=>{this.isMoving = false}, 50*5)
         }
     }
 
