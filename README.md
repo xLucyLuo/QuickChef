@@ -21,7 +21,6 @@
 - Tone.js library to control three different background music (fading, overlaying, timing, muting)
 - Webpack and Babel to bundle and transpile the source JavaScript code
 - npm to manage project dependencies
-- Sass to bring variables to stylesheets
 
 
 # Game Interface
