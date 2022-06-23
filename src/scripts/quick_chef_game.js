@@ -280,7 +280,7 @@ class QuickChefGame {
     popupBox.style.display = "flex"
     startButton.innerText = "PLAY AGAIN!"
     endMsg.style.display = "inline-block"
-    endScoreMsg.innerText = `Money Earned: $${this.points.toLocaleString()}`
+    endScoreMsg.innerText = `$${this.points.toLocaleString()}`
     
     this.resetSoundEvent()
   }  

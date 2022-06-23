@@ -262,3 +262,8 @@ strong.green-font {
   color: green;
   font-weight: bold;
 }
+
+strong.yellow-font {
+  color: #F9A603;
+  font-weight: bold;
+}
