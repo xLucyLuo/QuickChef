@@ -12,7 +12,7 @@ const MAX_QUEUE = 2;
 //1sec in milliseconds
 const TICK_INTERVAL = 50
 //5min in milliseconds
-const GAME_TIME_LIMIT = 300000//*.1
+const GAME_TIME_LIMIT = 300000*.1
 //1sec in milliseconds
 const COMBO_TIMER = 1000
 
@@ -132,6 +132,9 @@ class QuickChefGame {
 
     this.resetSoundEvent()
 
+    this.isCountdown = false;
+    this.countdownAudio = new Audio("assets/audio/10sec_countdown.mp3");
+
   }
 
   resetSoundEvent(){
@@ -197,9 +200,16 @@ class QuickChefGame {
   }
 
   updateTimers(){
+
+    // console.log(this.timeLeft)
+    
+    if (this.timeLeft <10100 && !this.isCountdown){
+      // console.log("COUNTDOWN")
+      this.isCountdown = true
+      this.countdownAudio.play();
+    }
     this.resolveFall()
     this.resolveComboTimer()
-    
     this.draw()
     if (this.timeLeft ===0){this.end()}
     this.timeLeft-=TICK_INTERVAL
@@ -283,6 +293,7 @@ class QuickChefGame {
     endScoreMsg.innerText = `$${this.points.toLocaleString()}`
     
     this.resetSoundEvent()
+    this.isCountdown = false;
   }  
 
   

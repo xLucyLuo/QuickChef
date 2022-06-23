@@ -49,9 +49,12 @@ class GameView{
                     game.chef.moveRight()
                     break;
                 case "ArrowDown":
-                    let audio = new Audio("assets/audio/drop.wav");
-                    audio.play();
                     let item = game.chef.throw();
+                    
+                    if (item){
+                        let audio = new Audio("assets/audio/drop.wav");
+                        audio.play();
+                    }
 
                     if(item && Utils.isTouching(game.assemblyStation, game.chef)){
                         if (item.name === "plate"){
