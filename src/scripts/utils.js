@@ -72,25 +72,6 @@ const Utils = {
 
         return str
     }
-
-    // isMatchSeq(seq1, seq2){
-    //     //returns 
-    //     if (seq1.length !==seq2.length){return false;}
-    //     let isMatch = true
-
-    //     while (seq1.length >0){
-    //         let elSeq1 = seq1.shift()
-    //         let elSeq2 = seq2.shift()
-
-    //         if ()
-    //         if (elSeq1 !== elSeq2){
-    //             return false
-    //         }
-    //     }
-
-    //     return isMatch
-    // }
-
 }
 
 export default Utils
