@@ -17,7 +17,7 @@ Other features:
 
 # Game Interface
 
-![Game Interface](https://github.com/xLucyLuo/QuickChef/tree/main/assets/images/game_interface.png)
+![Game Interface](https://github.com/xLucyLuo/QuickChef/blob/main/assets/images/game_interface.png)
 
 # Technologies, Libraries, APIs
 
