@@ -12,7 +12,7 @@ const MAX_QUEUE = 2;
 //1sec in milliseconds
 const TICK_INTERVAL = 50
 //5min in milliseconds
-const GAME_TIME_LIMIT = 300000*.1
+const GAME_TIME_LIMIT = 300000//*.1
 //1sec in milliseconds
 const COMBO_TIMER = 1000
 
