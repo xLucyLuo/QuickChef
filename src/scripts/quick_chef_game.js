@@ -1,7 +1,7 @@
 import Utils from './utils.js'
 import Chef from "./chef.js"
 import Ingredient from "./ingredient.js"
-import Kitchenware from "./kitchenware"
+import Kitchenware from "./kitchenware.js"
 import Station from './station.js'
 import Recipe from './recipe.js'
 
