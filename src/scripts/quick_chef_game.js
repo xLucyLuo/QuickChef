@@ -104,7 +104,7 @@ class QuickChefGame {
     this.player2 = player2
     this.player3 = player3
 
-    console.log(this.player3)
+  
 
     //fade in miliseconds
     const fade = 5000
@@ -200,7 +200,6 @@ class QuickChefGame {
   }
 
   updateTimers(){
-
     // console.log(this.timeLeft)
     
     if (this.timeLeft <10100 && !this.isCountdown){

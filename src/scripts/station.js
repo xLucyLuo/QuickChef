@@ -1,7 +1,7 @@
 import Utils from './utils.js'
 import MovingObject from "./moving_object.js"
-import Ingredient from "./ingredient.js"
-import Kitchenware from "./kitchenware"
+// import Ingredient from "./ingredient.js"
+// import Kitchenware from "./kitchenware"
 
 class Station extends MovingObject{
     constructor(maxSize, game, x, y, w, h, type, bgColor="white", labelColor="black"){

@@ -5,8 +5,6 @@ import * as Tone from 'tone';
 document.addEventListener("DOMContentLoaded", function () {
 
   const canvas = document.getElementsByTagName("canvas")[0];
-  // canvas.width = QuickChefGame.DIM_X;
-  // canvas.height = QuickChefGame.DIM_Y;
 
   const ctx = canvas.getContext("2d");
 
@@ -15,8 +13,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const popupBox = document.getElementById("popup-box")
   const instructionsEl = document.getElementById("game-instruction")
   const descriptionEl = document.getElementById("game-description")
+
   startButton.addEventListener("click", function(){
-    // debugger
     popupBox.style.display = "none"
     instructionsEl.style.display = "none"
     descriptionEl.style.display = "none"
@@ -36,11 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
     
     const quickChefGame = new QuickChefGame(canvas, player1, player2, player3);
     const gameView = new GameView(quickChefGame, ctx);
-    
-    
   })
-  
-
 });  
 
 
