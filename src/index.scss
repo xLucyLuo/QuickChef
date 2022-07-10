@@ -53,13 +53,13 @@ body {
 }
 
 
-.game-controls img{
+#game-controls img{
     // position: absolute;
     width: 50px;
     height:auto;
 }
 
-.game-controls {
+#game-controls {
     // position: absolute;
     display:flex;
     color: black;
@@ -71,7 +71,7 @@ body {
     margin-right:25vw;
 }
 
-.game-controls div {
+#game-controls div {
     // position: absolute;
     text-align: center;
     width:30px;

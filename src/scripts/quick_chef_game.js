@@ -99,12 +99,9 @@ class QuickChefGame {
     this.timeLeft = GAME_TIME_LIMIT
     this.gameTimer = setInterval(this.updateTimers.bind(this), TICK_INTERVAL);
 
-      
     this.player1 = player1
     this.player2 = player2
     this.player3 = player3
-
-  
 
     //fade in miliseconds
     const fade = 5000

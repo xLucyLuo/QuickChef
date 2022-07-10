@@ -193,12 +193,12 @@ body {
   width: 100%;
 }
 
-.game-controls img {
+#game-controls img {
   width: 50px;
   height: auto;
 }
 
-.game-controls {
+#game-controls {
   display: flex;
   color: black;
   height: auto;
@@ -208,7 +208,7 @@ body {
   margin-right: 25vw;
 }
 
-.game-controls div {
+#game-controls div {
   text-align: center;
   width: 30px;
   display: flex;

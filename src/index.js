@@ -13,12 +13,14 @@ document.addEventListener("DOMContentLoaded", function () {
   const popupBox = document.getElementById("popup-box")
   const instructionsEl = document.getElementById("game-instruction")
   const descriptionEl = document.getElementById("game-description")
+  const gameControls = document.getElementById("game-controls")
 
   startButton.addEventListener("click", function(){
     popupBox.style.display = "none"
     instructionsEl.style.display = "none"
     descriptionEl.style.display = "none"
-  
+    debugger
+    gameControls.style.display = "flex"
     
     const player1 = new Tone.Player("https://xlucyluo.github.io/QuickChef/assets/audio/countdown1.mp3").toDestination()
     const player2 = new Tone.Player("https://xlucyluo.github.io/QuickChef/assets/audio/countdown2.mp3").toDestination()
