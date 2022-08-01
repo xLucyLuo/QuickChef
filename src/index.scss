@@ -3,8 +3,14 @@
 @import './styles/popup.scss';
 
 
-    
+
+* {
+    overscroll-behavior-x: none;
+    overscroll-behavior-y: none;
+}
+
 header {
+    box-sizing: border-box;
     display: block;
     justify-content: space-between;
     flex-wrap: wrap;
