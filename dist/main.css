@@ -1,3 +1,245 @@
-html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline;text-decoration:none;text-align:inherit}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:"";content:none}table{border-collapse:collapse;border-spacing:0}canvas#cooking-table{background-color:#ffddae;margin:auto;display:block}#popup-box{z-index:999;position:fixed;width:55vw;top:25vh;left:20vw;padding:30px;background-color:rgba(255,255,255,.7);box-shadow:10px 10px 11px rgba(0,0,0,.25);border-radius:20px;font-size:30px;line-height:28px;color:#3e3e3e;display:flex;flex-direction:column;justify-content:space-between;align-items:center;font-family:"Dongle",sans-serif}#popup-box div{background-color:rgba(255,255,255,.7);width:100%;height:auto;border-radius:20px}#popup-box .game-title{font-family:"Pacifico",cursive;margin-bottom:30px;font-size:50px;color:#d04c73;text-shadow:10px 10px 10px gray;-webkit-text-stroke:1px pink}div#endgame-message div{text-align:center;display:inline-block;align-items:center;justify-content:center;font-size:40px}div#endgame-message p{padding-top:20px;margin-top:20px}div#game-instruction ol{display:inline-block;text-align:left;padding-left:40px}#popup-img{z-index:1;position:absolute;width:30%;height:auto;right:0;bottom:0}#start-button{width:300px;height:54px;font-size:25px;background-color:#d04c73;box-shadow:0px 1px 2px rgba(0,0,0,.5);color:#fff;border-radius:20px;border-color:#fff;margin:30px 0px;position:relative;cursor:pointer}#start-button:hover{background:#742a40;top:10px;-webkit-box-shadow:inset 0px 0px 5px #c1c1c1;-moz-box-shadow:inset 0px 0px 5px #c1c1c1;box-shadow:inset 0px 0px 5px #c1c1c1;outline:none;box-shadow:none}*{overscroll-behavior-x:none;overscroll-behavior-y:none}header{box-sizing:border-box;display:block;justify-content:space-between;flex-wrap:wrap;color:#fff;background-color:pink;padding:10px;width:100%;height:auto}header h1{width:100%;font-size:64px;text-align:center;font-family:"Pacifico",cursive;-webkit-text-stroke:1px #d04c73;text-shadow:10px 10px 10px #5c2233;margin-bottom:10px;margin-top:10px;border-radius:30px}header nav{margin-top:20px;display:flex}header .links{height:auto;text-align:left;padding-left:20vw;width:50%}header .links img{width:72px;height:auto}body{background-image:url("../assets/images/background.jpg");width:100%}#game-controls img{width:50px;height:auto}#game-controls{display:flex;color:#000;height:auto;align-items:right;justify-content:right;width:50%;margin-right:25vw}#game-controls div{text-align:center;width:30px;display:flex;justify-content:center;font-family:Arial}strong.red-font{color:red;font-weight:bold}strong.blue-font{color:#257cce;font-weight:bold}strong.brown-font{color:#da8a6d;font-weight:bold}strong.green-font{color:green;font-weight:bold}strong.yellow-font{color:#f9a603;font-weight:bold}
+/*!*************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/sass-loader/dist/cjs.js!./src/index.scss ***!
+  \*************************************************************************************************************************************/
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  text-decoration: none;
+  text-align: inherit;
+}
 
-/*# sourceMappingURL=main.css.map*/
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+canvas#cooking-table {
+  background-color: #ffddae;
+  margin: auto;
+  display: block;
+}
+
+#popup-box {
+  z-index: 999;
+  position: fixed;
+  width: 55vw;
+  /* height: 80vh; */
+  top: 175px;
+  left: 20vw;
+  padding: 30px;
+  background-color: rgba(255, 255, 255, 0.7);
+  box-shadow: 10px 10px 11px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  font-size: 30px;
+  line-height: 28px;
+  color: #3E3E3E;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  font-family: "Dongle", sans-serif;
+}
+
+#popup-box div {
+  background-color: rgba(255, 255, 255, 0.7);
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+}
+
+#popup-box .game-title {
+  font-family: "Pacifico", cursive;
+  margin-bottom: 30px;
+  font-size: 50px;
+  color: #d04c73;
+  text-shadow: 10px 10px 10px grey;
+  -webkit-text-stroke: 1px pink; /* width and color */
+}
+
+div#endgame-message div {
+  text-align: center;
+  display: inline-block;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+}
+
+div#endgame-message p {
+  padding-top: 20px;
+  margin-top: 20px;
+}
+
+div#game-instruction ol {
+  display: inline-block;
+  text-align: left;
+  padding-left: 40px;
+}
+
+#popup-img {
+  z-index: 1;
+  position: absolute;
+  width: 30%;
+  height: auto;
+  right: 0;
+  bottom: 0;
+}
+
+#start-button {
+  width: 300px;
+  height: 54px;
+  font-size: 25px;
+  background-color: #d04c73;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5);
+  color: white;
+  border-radius: 20px;
+  border-color: white;
+  margin: 30px 0px;
+  position: relative;
+  cursor: pointer;
+}
+
+#start-button:hover {
+  background: #742a40;
+  top: 10px;
+  -webkit-box-shadow: inset 0px 0px 5px #c1c1c1;
+  -moz-box-shadow: inset 0px 0px 5px #c1c1c1;
+  box-shadow: inset 0px 0px 5px #c1c1c1;
+  outline: none;
+  box-shadow: none;
+}
+
+* {
+  overscroll-behavior-x: none;
+  overscroll-behavior-y: none;
+}
+
+header {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  color: white;
+  background-color: pink;
+  padding: 10px;
+  width: 100%;
+  height: auto;
+}
+
+header h1 {
+  width: auto;
+  padding: 12px;
+  font-size: 64px;
+  text-align: center;
+  font-family: "Pacifico", cursive;
+  -webkit-text-stroke: 1px #d04c73; /* width and color */
+  text-shadow: 10px 10px 10px #5c2233;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  border-radius: 30px;
+}
+
+header .links {
+  height: auto;
+  text-align: left;
+  align-items: left;
+  width: 300px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
+header .links img {
+  width: 50px;
+  height: auto;
+}
+
+body {
+  background-image: url("../assets/images/background.jpg");
+  width: 100%;
+}
+
+#game-controls img {
+  width: 40px;
+  height: auto;
+}
+
+#game-controls {
+  display: flex;
+  color: black;
+  height: auto;
+  align-items: flex-end;
+  justify-content: flex-end;
+  width: 300px;
+}
+
+#game-controls div {
+  text-align: center;
+  width: 30px;
+  display: flex;
+  justify-content: center;
+  font-family: Arial;
+}
+
+strong.red-font {
+  color: red;
+  font-weight: bold;
+}
+
+strong.blue-font {
+  color: rgb(37, 124, 206);
+  font-weight: bold;
+}
+
+strong.brown-font {
+  color: #da8a6d;
+  font-weight: bold;
+}
+
+strong.green-font {
+  color: green;
+  font-weight: bold;
+}
+
+strong.yellow-font {
+  color: #F9A603;
+  font-weight: bold;
+}
