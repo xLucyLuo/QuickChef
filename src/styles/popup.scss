@@ -1,11 +1,13 @@
 #popup-box{
     z-index: 999;
     position: fixed;
-    width: 55vw;
-    max-width: 1200px;
+    width: 60vw;
+    max-width: 1000px;
     /* height: 80vh; */
+    // to center
+    left: 50%;
+    transform: translate(-50%,0);
     top: 175px;
-    left: 20vw;
     padding: 30px;
     background-color: rgb(255,255,255,0.70);
     box-shadow: 10px 10px 11px rgba(0, 0, 0, 0.25);
